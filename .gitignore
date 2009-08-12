@@ -19,3 +19,4 @@ valgrind.log
 pod2htm*
 nytprof*
 tmp/*
+old/
