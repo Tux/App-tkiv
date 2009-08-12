@@ -1,6 +1,6 @@
 =head1 NAME
 
-App::tkiv - An image viewer based on IrfanView
+App::tkiv - An image viewer in Perl::Tk based on IrfanView
 
 =head1 SYNOPSIS
 
