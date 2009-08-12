@@ -14,7 +14,7 @@ my %prereq_pm = (
     "Tk"		=>  804.027,
     "Tk::JPEG"		=>    0,
     "Tk::PNG"		=>    0,
-    "Tk::TIFF"		=>   -1,	# Only works with Tk-804.027_500 and up
+    "Tk::TIFF"		=>    0,	# Only works with Tk-804.027_500 and up
     "Tk::Bitmap"	=>    0,
     "Tk::Pixmap"	=>    0,
     "Tk::Photo"		=>    0,
@@ -25,12 +25,13 @@ my %prereq_pm = (
     "Tk::BrowseEntry"	=>    0,
     "Tk::Animation"	=>    0,
 
+    # Optional if $mw->screenwidth works reliable
     "X11::Protocol"	=>    0,
 
     # At least one of these should be available:
-    "Image::ExifTool"	=>   -1,
-    "Image::Size"	=>   -1,
-    "Image::Info"	=>   -1,
+    "Image::ExifTool"	=>    0,
+    "Image::Size"	=>    0,
+    "Image::Info"	=>    0,
     );
 
 my $n_image_mod = 0;
@@ -64,12 +65,25 @@ package MY;
 
 sub postamble
 {
+    my $min_vsn = ($] >= 5.010 && -d "xt" && -d "tmp" && ($ENV{AUTOMATED_TESTING} || 0) != 1)
+	? join "\n" =>
+	    'test ::',
+	    '	-@env TEST_FILES="xt/*.t" make -e test_dynamic',
+	    ''
+	: "";
     join "\n" =>
-	'cover test_cover:',
-	'	cover -delete',
-	'	HARNESS_PERL_SWITCHES=-MDevel::Cover $(MAKE) test',
-	'	cover',
-	'';
+	'checkmeta:',
+	'	perl sandbox/genMETA.pl -c',
+	'',
+	'fixmeta:	distmeta',
+	'	perl sandbox/genMETA.pl',
+	'',
+	'tgzdist:	checkmeta fixmeta $(DISTVNAME).tar.gz distcheck',
+	'	-@mv -f $(DISTVNAME).tar.gz $(DISTVNAME).tgz',
+	'	-@cpants_lint.pl $(DISTVNAME).tgz',
+	'	-@rm -f Debian_CPANTS.txt',
+	'',
+	$min_vsn;
     } # postamble
 
 1;
