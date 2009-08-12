@@ -1,0 +1,347 @@
+=head1 NAME
+
+App::tkiv - An image viewer based on IrfanView
+
+=head1 SYNOPSIS
+
+ $ iv [-f] [option=value ...] [dir]
+
+ $ iv -f imageposition=s thumsorting=size .
+
+=head1 DESCRIPTION
+
+C<iv> is a pure-perl application that was written to mimic the behaviour
+of the image view and manipulation program C<irfanview>, which is available
+as freeware on Windows.
+
+Linux already offers many free image view and manipulation programs, but
+none gave me the key-driven approach that I liked in IrfanView, and most
+left traces of what was viewed in hidden files (thumbnail previews etc).
+
+C<iv> is not written to be a I<better> image viewer. It is written to
+prove such an application can be written in perl and still is fast and
+versatile enough to need my (own) needs.
+
+C<iv> is not aiming for a complete rewrite of IrfanView.
+
+=head2 Options
+
+Options are case insensitive. They are read from /etc/.ivrc, ~/.ivrc,
+./.ivrc, or image_dir/.ivrc (in that order if available).
+
+Not (yet) local per dir, so the last one read stays active and overrules
+the previous settings.
+
+    thumbsize		=> 80,		# in pixels
+	size of the thumbnails in the thumbview. default 80x80
+
+    thumbrows		=> 5,
+	number of rows in the thumbview. default 5
+
+    thumbposition	=> "se",
+	position of the thumbview on the screen. default se (bottom right)
+	possible values: n, ne, e, se, s, sw, w, nw, c
+
+    thumbsorting	=> "default",
+	defines the ordering of the thumbnails in the thumbview.
+
+	default	: on the numeric part of the image name, then on the full name
+	caseless: on the lower-cased image name
+	date	: on mtime
+	size	: on (file) size
+	random	: random
+
+    thumbsortorder	=> "ascending",
+	ordering of the thumbs. default ascending. possible values ascending
+	or descending
+
+    imageposition	=> "nw",
+	position of the image window. default nw (top-left)
+	possible values: n, ne, e, se, s, sw, w, nw, c
+
+    imagedir		=> ".",
+	default image dir (current folder)
+
+    slideshowdelay	=> 1500,	# in milliseconds
+	in slide shows, define the display time for each image. default: 1500 ms
+
+    slideposition	=> "c",
+	position of the full image in slide-show mode. default c (center)
+	possible values: n, ne, e, se, s, sw, w, nw, c
+
+    slidefull		=> 0,
+	display images auto-fit in slide-show mode. default 0 (off)
+
+    slidecover		=> 0,
+	EXPERIMENTAL
+	cover the background when in slideshow mode
+
+    maxx		=> 9999,
+	maximum horizontal resolution (some size quests are unreliable)
+
+    maxy		=> 9999,
+	maximum vertical resolution (some size quests are unreliable)
+
+    smallfont		=> "{Liberation Mono} 8",",
+	define the font for labels
+
+    selectionFont	=> "{Liberation Sans} 5",
+	the font used to display information with the selection rectangle
+
+    selectionColor	=> "Yellow",
+	the color used when drawing selection rectangles
+
+    confirmdelete	=> 1,
+	ask for confirmation when deleting images. default 1 (true)
+
+    removetarget	=> 0,
+	remove target folder when it is empty. default 0 (false)
+
+    imagefull		=> 0,
+	show images full-screen. default 0 (off). Full-screen resizes the
+	image to automatically fit the screen height or screen-width when
+	maintaining aspect ratio. Also sometimes called auto-fit.
+
+    showexifinfo	=> 0,
+	show a summary of the exif info of the image on the image
+
+    exifinfocolor	=> "Blue",
+	the color if the exif info text on the image for showexifinfo
+
+    decoration		=> 1,
+	show the screen control elements. Default 1 (on). Some window
+	managers support full control, either by keys or mouse, even when
+	the borders and title bar are gone. Some refuse to do scroll bars
+	and such when the decoration is disabled. YMMV
+
+=head2 Key bindings
+
+Key bindings. Most are the same as the windows program IrfanView, after
+which iv was initially modelled
+
+			Thumb view		Image view
+  keys_quit
+
+    q Q ESC		Quit program		Close image,
+						return to thumbs
+
+  keys_options
+
+    o			Open option window	-
+
+  keys_firstpic
+
+    0 1 a		Open first pic		id
+
+  keys_prevpic
+
+    Left Up BS		Prev pic (round robin)	id
+
+  keys_nextpic
+
+    Space Right Down	Next pic (round robin)	id
+
+  keys_lastpic
+
+    9 z			Open last pic		id
+
+  keys_fullscreen
+
+    f F11		-			Switch to auto-fit
+
+  keys_fitwidth
+
+    b			-			Zoom to fit screen-width
+
+  keys_fitheight
+
+    h			-			Zoom to fit screen-height
+
+  keys_origsize
+
+    o			-			Display in original size
+
+  keys_full_rc
+
+    F			-			Switch to auto-fit and save
+						in ./.ivrc
+
+  keys_rotleft
+
+    l			-			Rotate image left (90°
+						anti-clockwise)
+
+  keys_rotexifl
+
+    L			-			Rotate image left (90° anti-
+						clockwise) in the EXIF info,
+						and store the change in the
+						image file
+
+  keys_rotright
+
+    r			-			Rotate image right (90°
+						clockwise)
+
+  keys_rotexifr
+
+    R			-			Rotate image right (90°
+						clockwise) in the EXIF info,
+						and store the change in the
+						image file
+  keys_zoomin
+
+    plus		-			Zoom in with 20% steps.
+
+  keys_zoomout
+
+    minus		-			Zoom out with 20% steps.
+
+  keys_delete
+
+    Delete		-			Delete image from disk
+
+  keys_slideshow
+
+    w s			Start slideshow		id
+
+  keys_exif
+
+    i			-			Show EXIF info
+
+  keys_exifinfo
+
+    I			-			Show EXIF info summary on image
+
+  keys_decoration
+
+    d			-			Remove decoration. Unreliable,
+						you might loose control or key
+						bindings.
+
+  keys_imgpos_nw
+
+    Alt-u		-			Set image position to nw
+
+  keys_imgpos_n
+
+    Alt-i		-			Set image position to n
+
+  keys_imgpos_ne
+
+    Alt-o		-			Set image position to ne
+
+  keys_imgpos_e
+
+    Alt-l		-			Set image position to e
+
+  keys_imgpos_se
+
+    Alt-period		-			Set image position to se
+
+  keys_imgpos_s
+
+    Alt-comma		-			Set image position to s
+
+  keys_imgpos_sw
+
+    Alt-m		-			Set image position to sw
+
+  keys_imgpos_w
+
+    Alt-j		-			Set image position to w
+
+  keys_imgpos_c
+
+    Alt-k		-			Set image position to c
+
+
+  keys_crop
+
+    Control-y		-			Crop image to selection box
+
+Zoom factors are limited to 1 2 3 4 5 7 9 11 14 17 21 26 32 39 47 57 69 83 100
+120 144 172 206 247 296 355 426 511 613 735 882 1058 1269 1522 1826 2191 2629
+3154 3784 4540 5448 6537 7844 9412 and 11300
+
+=head1 EXIF INFO
+
+...
+
+=head1 EXAMPLES
+
+...
+
+=head1 DIAGNOSTICS
+
+...
+
+=head1 BUGS and CAVEATS
+
+For manipulation (resizing, rotation, ...) the external command C<convert>
+from ImageMagick is used.
+
+=head1 TODO
+
+=over 2
+
+=item save/load from .ivrc buttons on option window
+
+=item Slideshow
+
+ - behaviour: location, dir depth, cycling
+ - randomness, slide lists, full screen background (no decoration)
+ - playlist
+ - loop control
+ - Auto-sense image load time for slideshows
+
+=item Image manipulation
+
+ - selection less picky
+ - selection from zoom other than original
+ - Save, Save as ...
+
+=item Titles and decoration behaviour
+
+ - adjust height/width of screen-fit images to decoration
+   (I just cannot get $iv->overrideredirect (1) to work as I want)
+
+=item Tree view
+
+ - Hide dirs above dt root
+ - Allow a set of dirs from the command line
+
+=item Animation
+
+ - use Tk::Animation for animated gif's
+
+=item Menu's
+
+=item Documentation
+
+=item Portability
+
+ - remove defined-or
+ - make image format's optional (TIFF, NEF, ...)
+
+=back
+
+=head1 SEE ALSO
+
+L<perl>, L<Tk>, L<Tk::JPEG>, L<Tk::PNG>, L<Tk::TIFF>, L<Tk::Bitmap>,
+L<Tk::Pixmap>, L<Tk::Animation>, L<Image::ExifTool>, L<Image::Size>,
+L<Image::Info> and ImageMagick.
+
+=head1 AUTHOR
+
+H.Merijn Brand F<E<lt>h.m.brand@xs4all.nlE<gt>> wrote this for his own
+personal use, but was asked to make it publicly available as application.
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2004-2009 H.Merijn Brand for PROCURA B.V.
+
+This software is free; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
