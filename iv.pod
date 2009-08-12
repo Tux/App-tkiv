@@ -10,7 +10,7 @@ App::tkiv - An image viewer in Perl::Tk based on IrfanView
 
 =head1 DESCRIPTION
 
-C<iv> is a pure-perl application that was written to mimic the behaviour
+C<iv> is a pure-perl application that was written to mimic the behavior
 of the image view and manipulation program C<irfanview>, which is available
 as freeware on Windows.
 
@@ -289,7 +289,7 @@ from ImageMagick is used.
 
 =item Slideshow
 
- - behaviour: location, dir depth, cycling
+ - behavior: location, dir depth, cycling
  - randomness, slide lists, full screen background (no decoration)
  - playlist
  - loop control
@@ -301,7 +301,7 @@ from ImageMagick is used.
  - selection from zoom other than original
  - Save, Save as ...
 
-=item Titles and decoration behaviour
+=item Titles and decoration behavior
 
  - adjust height/width of screen-fit images to decoration
    (I just cannot get $iv->overrideredirect (1) to work as I want)
@@ -331,6 +331,12 @@ from ImageMagick is used.
 L<perl>, L<Tk>, L<Tk::JPEG>, L<Tk::PNG>, L<Tk::TIFF>, L<Tk::Bitmap>,
 L<Tk::Pixmap>, L<Tk::Animation>, L<Image::ExifTool>, L<Image::Size>,
 L<Image::Info> and ImageMagick.
+
+=head1 WARRANTY
+
+The fact that I use it on my own picture sets is by no means a guarantee
+that the software is without bugs. Use with care, and make backups of all
+pictures you care about before experimenting.
 
 =head1 AUTHOR
 
