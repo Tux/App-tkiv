@@ -12,7 +12,7 @@ use warnings;
     $pid and exit 0;
     } # to_background
 
-our $VERSION = 0.112;
+our $VERSION = 0.113;
 
 my %Option = (
     thumbsize		=> 80,		# in pixels
@@ -149,20 +149,29 @@ use Tk::Dialog;
 use Tk::Balloon;
 use Tk::BrowseEntry;
 use Tk::Animation;
-use Data::Peek;
 use File::Copy;
+#use Data::Peek;
 
 our $exiftool = 0;
 our $iinftool = 0;
 our $imsztool = 0;
 our $exiftran = 0;
-eval {
-    use Image::ExifTool qw( ImageInfo );
-    $exiftool = Image::ExifTool->new ();
-    use Image::Size	qw( imgsize );
-    $imsztool = exists &imgsize;
-    use Image::Info	qw( image_info dim );
-    $iinftool = exists &image_info;
+BEGIN {
+    eval {
+	require Image::ExifTool;
+	Image::ExifTool->import ("ImageInfo");
+	$exiftool = Image::ExifTool->new ();
+	};
+    eval {
+	require Image::Size;
+	Image::Size->import ("imgsize");
+	$imsztool = exists &imgsize;
+	};
+    eval {
+	require Image::Info;
+	Image::Info->import ("image_info", "dim");
+	$iinftool = exists &image_info;
+	};
     -x "/usr/bin/exiftran" and $exiftran = 1;
     };
 
@@ -298,6 +307,7 @@ sub Tk::PhotoXY
     my $geo = "${rx}x${ry}";
     my $q = $f =~ m/'/ ? '"' : "'";
     system qq{convert -size $geo -resize $geo+0+0 $rot $q$f$q $cfn.jpg};
+#   system "convert", "-size", $geo, "-resize", "$geo+0+0", $rot, $f, "$cfn.jpg";
     # convert generates multiple files for animated images
     my @cfn = glob "${cfn}*jpg*";
     if (@cfn) {
