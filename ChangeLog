@@ -1,5 +1,6 @@
-0.113 - 23 Aug 2009
+0.113 - 24 Aug 2009
     * Correct wrong eval { use ... }} checking of optional modules
+    * system call now takes list to prevent quote detection
 
 0.112 - 11 Aug 2009
     * Make X11::Protocol optional, and use $mw->screenwidth
