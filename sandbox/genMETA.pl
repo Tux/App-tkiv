@@ -73,7 +73,7 @@ provides:
     file:               iv
     version:            VERSION
 requires:                       
-  perl:                 5.006
+  perl:                 5.010000
   Data::Peek:           0
   Getopt::Long:         2.27
   File::Copy:           0
@@ -93,7 +93,7 @@ requires:
   Image::Size:          0
   Image::Info:          0
 recommends:
-  perl:                 5.008007
+  perl:                 5.010001
 configure_requires:
   ExtUtils::MakeMaker:  0
 build_requires:
