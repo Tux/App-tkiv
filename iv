@@ -645,8 +645,7 @@ sub dtcmd
 	    @_ and $ti  = shift @_;
 	    my $trg = @_ ? shift @_ : "";
 
-	    $iv && Exists ($iv) and $iv->destroy;
-#	    $bg && Exists ($bg) and $bg->destroy;
+	    my $old_iv = $iv; # Destroy prev pic after displaying new
 	    reset_selection ();
 
 	    my $aid;			# last stacked After ID
@@ -763,6 +762,8 @@ sub dtcmd
 	    ref $pr->{$size}{phot} eq "Tk::Animation" and
 		$pr->{$size}{phot}->start_animation ();#$pr->{exif}{Animated});
 	    #$iv->focusForce;
+
+	    $old_iv && Exists ($old_iv) and $old_iv->destroy;
 
 	    my ($_pic, $_next_pic);
 	    $_pic = sub {

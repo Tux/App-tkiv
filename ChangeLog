@@ -1,6 +1,7 @@
-0.113 - 24 Aug 2009
+0.113 - 25 Aug 2009
     * Correct wrong eval { use ... }} checking of optional modules
     * system call now takes list to prevent quote detection
+    * Delayed destroy of previous pic display to ease transitions (thanks JV)
 
 0.112 - 11 Aug 2009
     * Make X11::Protocol optional, and use $mw->screenwidth
