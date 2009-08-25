@@ -692,8 +692,8 @@ sub dtcmd
 
 		# left, top, right, bottom
 		-scrollregion => [ 0, 0, $pr->{$size}{wdth}, $pr->{$size}{hght} ],
-		xscrollincrement => $option{scrollspeed},
-		yscrollincrement => $option{scrollspeed},
+		xscrollincrement => $Option{scrollspeed},
+		yscrollincrement => $Option{scrollspeed},
 		)->pack (@dpo);
 	    $fp->createImage (0, 0, -anchor => "nw",
 		-image => $pr->{$size}{phot});
