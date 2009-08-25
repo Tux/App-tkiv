@@ -114,6 +114,11 @@ the previous settings.
 	the borders and title bar are gone. Some refuse to do scroll bars
 	and such when the decoration is disabled. YMMV
 
+    scrollspeed		=> 3,
+	The default scroll increments for Tk::Canvas is a bit too course
+	for fine-grained scrolling. A low value enables precise positioning
+	with the scroll wheel, high values scroll fast.
+
 =head2 Key bindings
 
 Key bindings. Most are the same as the windows program IrfanView, after
