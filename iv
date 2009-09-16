@@ -220,18 +220,17 @@ my $def_sls = $Option{slideshowdelay}; # 1.5 sec / pic
 my $mw = Tk::MainWindow->new (-title => "iv");
 
 # Screen dimensions
-my ($cx, $cy);
-eval {
+my ($cx, $cy) = ($mw->screenwidth, $mw->screenheight);
+eval { # Use both methods, as the WM might return bogus values after having
+       # been resized e.g. for beamer output
     require X11::Protocol;
     my $x11 = X11::Protocol->new ();
     my $screen = ($ENV{DISPLAY}||":0.0") =~ m/\.(\d+)$/ ? $1 : 0;
     $x11->choose_screen ($screen); # Root window
-    ($cx, $cy) = ( $x11->{width_in_pixels}, $x11->{height_in_pixels} );
+    my ($xx, $xy) = ( $x11->{width_in_pixels}, $x11->{height_in_pixels} );
+    $xx > $cx and $cx = $xx;
+    $xy > $cy and $cy = $xy;
     };
-unless ($cx && $cy) {
-    $cx = $mw->screenwidth;
-    $cy = $mw->screenheight;
-    }
 $Option{real_cx} = $cx;
 $cx > $Option{maxx} and $cx = $Option{maxx};
 $cy > $Option{maxy} and $cy = $Option{maxy};
