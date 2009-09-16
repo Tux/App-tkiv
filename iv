@@ -18,6 +18,7 @@ my %Option = (
     thumbsize		=> 80,		# in pixels
     thumbrows		=> 5,
     thumbposition	=> "se",
+    thumbrefresh	=> 1,
     thumbsorting	=> "default",
     thumbsortorder	=> "ascending",
     imageposition	=> "nw",
@@ -1029,18 +1030,23 @@ sub dtcmd
 		    -l $file && $Option{removetarget} and unlink readlink $file;
 		    unlink $file;
 		    $quit->();
-		    $tn[-1]{wdgt}->destroy;
-		    foreach my $i (reverse (($ti + 1) .. $#tn)) {
-			my $w = $tn[$i]->{wdgt} = $tn[$i - 1]{wdgt};
-			$w->configure (-image => $tn[$i]{thmb}{phot});
-			$w->update;
+		    if ($Option{thumbrefresh} || $ti == $#tn) {
+			$tn[-1]{wdgt}->destroy;
+			foreach my $i (reverse (($ti + 1) .. $#tn)) {
+			    my $w = $tn[$i]->{wdgt} = $tn[$i - 1]{wdgt};
+			    $w->configure (-image => $tn[$i]{thmb}{phot});
+			    $w->update;
+			    }
+			$ni--;
+			$tr--;
+			$tn[$ti]{orig}{phot} and $or--;
+			$tn[$ti]{full}{phot} and $fr--;
+			splice @tn, $ti, 1;
+			$ti > $#tn and $ti--;
 			}
-		    $ni--;
-		    $tr--;
-		    $tn[$ti]{orig}{phot} and $or--;
-		    $tn[$ti]{full}{phot} and $fr--;
-		    splice @tn, $ti, 1;
-		    $ti > $#tn and $ti--;
+		    else {
+			$ti++;
+			}
 		    if (@tn) {
 			$f11->($vs);
 			}

@@ -42,6 +42,14 @@ the previous settings.
 	position of the thumbview on the screen. default se (bottom right)
 	possible values: n, ne, e, se, s, sw, w, nw, c
 
+    thumbrefresh	=> 1,
+	when deleting images, the thumb preview is also deleted, and all
+	thumbs then have to be re-displayed in order to fill the gap. When
+	deleting images out of a long sequence, this will take a long time.
+	Disabling the refresh will make the cleanup procedure go faster,
+	but will cause errors/warnings when you re-visit the thumb that
+	has been deleted
+
     thumbsorting	=> "default",
 	defines the ordering of the thumbnails in the thumbview.
 

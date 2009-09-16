@@ -3,6 +3,7 @@
     * system call now takes list to prevent quote detection
     * Delayed destroy of previous pic display to ease transitions (thanks JV)
     * Introduce ScrollSpeed option
+    * Introduce ThumbRefresh option
     * Use both possible methods to detect screen-size and use largest values
 
 0.112 - 11 Aug 2009
