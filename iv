@@ -41,7 +41,8 @@ my %Option = (
     exifinfocolor	=> "Blue",
     scrollspeed		=> 3,
 
-    keys_quit		=> [qw( Key-q Escape Shift-Q	)],
+    keys_quit		=> [qw( Key-q Escape		)],
+    keys_quit_all	=> [qw( Shift-Q Control-Q	)],
     keys_options	=> [qw( Key-o			)],
     keys_firstpic	=> [qw( Key-0 Key-1  Key-a	)],
     keys_prevpic	=> [qw( Left  Up     BackSpace	)],
@@ -424,6 +425,7 @@ sub show_exif
 	    if (Exists ($ow)) { $ow->destroy; $ow = undef; }
 	    if (Exists ($tl)) { $tl->destroy; $tl = undef; }
 	    }) for @{$Option{keys_quit}};
+	$W->bind ($_, \&exit) for @{$Option{keys_quit_all}};
 	}
     } # show_exif
 
@@ -869,7 +871,8 @@ sub dtcmd
 		    #$dt->focusForce;
 		    }; # sub_quit
 
-		$W->bind ($_, $quit) for @{$Option{keys_quit}};
+		$W->bind ($_, $quit)	for @{$Option{keys_quit}};
+		$W->bind ($_, \&exit)	for @{$Option{keys_quit_all}};
 
 		# Rotate right
 		$W->bind ($_, sub {
@@ -1244,7 +1247,7 @@ $tg->gridColumnconfigure (0, -weight => 1); # ... X and Y dimensions
 $mw->geometry (loc ($tp, 200 + $tnx * $tpx + 45, .65 * $cy));
 
 foreach my $W ($df, $dt, $tn, $tg, $mw) {	# not $mw, would cause double starts
-    $W->bind ($_ => \&exit) for @{$Option{keys_quit}};
+    $W->bind ($_ => \&exit) for @{$Option{keys_quit}}, @{$Option{keys_quit_all}};
     # First pic
     $W->bind ($_, sub {
 	$f11 or return;

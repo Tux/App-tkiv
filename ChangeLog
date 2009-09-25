@@ -7,6 +7,7 @@
     * Use both possible methods to detect screen-size and use largest values
     * Introduce -1 command line option
     * Update and expand documentation
+    * Introduce keys_quit_all
 
 0.112 - 11 Aug 2009
     * Make X11::Protocol optional, and use $mw->screenwidth

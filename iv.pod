@@ -160,8 +160,12 @@ which iv was initially modelled
 			Thumb view		Image view
   keys_quit
 
-    q Q ESC		Quit program		Close image,
+    q ESC		Quit program		Close image,
 						return to thumbs
+
+  keys_quit_all
+
+    Q Control-q		Quit program		Quit program
 
   keys_options
 
