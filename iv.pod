@@ -4,7 +4,7 @@ App::tkiv - An image viewer in Perl::Tk based on IrfanView
 
 =head1 SYNOPSIS
 
- $ iv [-f] [option=value ...] [dir]
+ $ iv [-v[#]] [-f] [-1|-s] [option=value ...] [dir]
 
  $ iv -f imageposition=s thumsorting=size .
 
@@ -23,6 +23,31 @@ prove such an application can be written in perl and still is fast and
 versatile enough to need my (own) needs.
 
 C<iv> is not aiming for a complete rewrite of IrfanView.
+
+=head1 Command Line Arguments
+
+=over 2
+
+=item -v[#]
+
+Set verbose level. Default value is 0. A plain -v without value will set
+the level to 1.
+
+=item -f
+
+Start in full-screen mode. Thumnail view will not be full-screen, but the
+displayed images will. This overrules the default option from .ivrc files.
+
+=item -s
+
+Start the slideview on open automatically.
+
+=item -1
+
+After populating the thumbnail view, immediately display the first image
+and minimize the thumnail view.
+
+=back
 
 =head2 Options
 

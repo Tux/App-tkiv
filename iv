@@ -131,10 +131,12 @@ use Getopt::Long qw(:config bundling nopermute passthrough);
 my $opt_f = 0;	# Start with full-screen pics
 my $opt_v = 0;	# Verbosity / debug
 my $opt_s = 0;	# Start slideshow immediately
+my $opt_1 = 0;	# On startup, select first image and minimize thumbnail view
 GetOptions (
     "v:1" => \$opt_v,
     "f"   => \$opt_f,
     "s"   => \$opt_s,
+    "1"   => \$opt_1,
     ) or usage (0);
 
 use Cwd qw( realpath );
@@ -1138,6 +1140,16 @@ sub dtcmd
 	# Display the thumbnail
 	$w->update;
 	}
+
+    if ($opt_1) {
+	$opt_1 = 0;
+	if (@tn) {
+	    $ti = 0;
+	    $f11->($vs);
+	    $mw->iconify;
+	    }
+	}
+
     $refreshing = "";
     }; # dtcmd
 
