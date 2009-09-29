@@ -1254,6 +1254,12 @@ foreach my $W ($df, $dt, $tn, $tg, $mw) {	# not $mw, would cause double starts
 	$ti = 0;
 	$f11->($vs);
 	}) for @{$Option{keys_firstpic}};
+    # Last pic
+    $W->bind ($_, sub {
+	$f11 or return;
+	$ti = $#tn;
+	$f11->($vs);
+	}) for @{$Option{keys_lastpic}};
     # Start Slideshow
     $W->bind ($_, sub {
 	$f11 or return;

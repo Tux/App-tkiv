@@ -1,4 +1,4 @@
-0.113 - 25 Sep 2009
+0.113 - 29 Sep 2009
     * Correct wrong eval { use ... }} checking of optional modules
     * system call now takes list to prevent quote detection
     * Delayed destroy of previous pic display to ease transitions (thanks JV)
@@ -8,6 +8,7 @@
     * Introduce -1 command line option
     * Update and expand documentation
     * Introduce keys_quit_all
+    * Add missing start with last pic key binding
 
 0.112 - 11 Aug 2009
     * Make X11::Protocol optional, and use $mw->screenwidth
