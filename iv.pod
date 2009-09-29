@@ -187,6 +187,10 @@ which iv was initially modelled
 
     9 z			Open last pic		id
 
+  keys_firstnext
+
+    v			-			Open first pic in next folder
+
   keys_fullscreen
 
     f F11		-			Switch to auto-fit

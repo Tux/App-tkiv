@@ -44,6 +44,7 @@ my %Option = (
     keys_quit		=> [qw( Key-q Escape		)],
     keys_quit_all	=> [qw( Shift-Q Control-Q	)],
     keys_options	=> [qw( Key-o			)],
+    keys_firstnext	=> [qw( Key-v			)],
     keys_firstpic	=> [qw( Key-0 Key-1  Key-a	)],
     keys_prevpic	=> [qw( Left  Up     BackSpace	)],
     keys_nextpic	=> [qw( Right Down   space	)],
@@ -512,6 +513,7 @@ sub dtcmd
     # Expansion also invokes this callback
     @_ == 1                or return;
     $idir = realpath $_[0] or return ($refreshing = "");
+    #print STDERR "dtcmd (idir = $idir)\n";
     $refreshing eq $idir  and return;
     $refreshing = $idir;
 
@@ -874,6 +876,12 @@ sub dtcmd
 		$W->bind ($_, $quit)	for @{$Option{keys_quit}};
 		$W->bind ($_, \&exit)	for @{$Option{keys_quit_all}};
 
+		$W->bind ($_, sub {
+		    $quit->();
+		    $opt_1 = 2;
+		    dirnext ();
+		    }) for @{$Option{keys_firstnext}};
+
 		# Rotate right
 		$W->bind ($_, sub {
 		    $_rotate->(90);
@@ -1145,11 +1153,12 @@ sub dtcmd
 	}
 
     if ($opt_1) {
+	my $action = $opt_1;
 	$opt_1 = 0;
 	if (@tn) {
 	    $ti = 0;
 	    $f11->($vs);
-	    $mw->iconify;
+	    $action == 1 and $mw->iconify;
 	    $iv->raise;
 	    $iv->focusForce;
 	    }
@@ -1169,6 +1178,7 @@ $dt = $df->Scrolled ("DirTree",
     -directory	=> $dir,
     -browsecmd  => sub {
 	$dt->xview (moveto => .60);
+	#print STDERR "dtcmd (@_) from scrolled, coming from $idir!\n";
 	dtcmd (@_);
 	},
 
@@ -1185,6 +1195,7 @@ $dt->autosetmode;
 sub dirup
 {
     (my $up = $idir) =~ s:/[^/]+$:: or return;
+print STDERR "UP: old: $idir, new: $up\n";
    #DDumper ($dt);
    #$dt->setmode ($idir, "open");
     $dt->close ($idir);
@@ -1199,20 +1210,30 @@ sub dirup
     dtcmd ($up);
     } # dirup
 
-$dt->bind ("<Left>", \&dirup);
+sub dirnext
+{
+    (my $up = $idir) =~ s:/[^/]+$:: or return;
+
+    my @dir = ($dt->child_entries ($up, 1), $idir);
+    shift @dir while $dir[0] ne $idir;
+    @dir > 1 && $dir[0] ne $dir[1] or return;
+
+    $dt->close ($idir);
+    $dt->chdir ($up = $dir[1]);
+    $dt->open  ($up);
+    $dt->xview (moveto => .60);
+    dtcmd ($up);
+    } # dirnext
+
+#$dt->bind ("<less>",  \&dirup);
 $dt->bind ($_, sub {
     (my $up = $idir) =~ s:/[^/]+$:: or return;
     $dt->open  ($up);
-    $dt->setmode ($up, "open");
-    $dt->open  ($up);
-    $dt->chdir ($idir);
-    $dt->open  ($idir);
-    $dt->setmode ($idir, "open");
     $dt->chdir ($idir);
     $dt->open  ($idir);
     $dt->xview (moveto => .60);
     dtcmd ($idir);
-    }) for qw( <Right> );
+    }) for qw( <greater> );
 
 my @fs  = (-font => $Option{smallfont});
 my @fsv = (@fs, -foreground => "Maroon");
