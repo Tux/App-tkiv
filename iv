@@ -40,6 +40,7 @@ my %Option = (
     showexifinfo	=> 0,
     exifinfocolor	=> "Blue",
     scrollspeed		=> 3,
+    titledirs		=> 0,
 
     keys_quit		=> [qw( Key-q Escape		)],
     keys_quit_all	=> [qw( Shift-Q Control-Q	)],
@@ -617,6 +618,12 @@ sub dtcmd
 	    );
 
 	my $titl = $img;
+	if (my $nd = $Option{titledirs}) {
+	    (my $d = $idir) =~ s{/?$}{/};
+	    while ($d =~ s{([^/]+/)$}{} && $nd--) {
+		substr $titl, 0, 0, $1;
+		}
+	    }
 	utf8::upgrade ($titl);
 	push @tn, {
 	    wdgt => $w,		# Widget
@@ -1195,9 +1202,6 @@ $dt->autosetmode;
 sub dirup
 {
     (my $up = $idir) =~ s:/[^/]+$:: or return;
-print STDERR "UP: old: $idir, new: $up\n";
-   #DDumper ($dt);
-   #$dt->setmode ($idir, "open");
     $dt->close ($idir);
     $dt->setmode ($idir, "close");
     $dt->close ($idir);
@@ -1219,13 +1223,14 @@ sub dirnext
     @dir > 1 && $dir[0] ne $dir[1] or return;
 
     $dt->close ($idir);
+    $dt->chdir ($up);
+    $dt->open  ($up);
     $dt->chdir ($up = $dir[1]);
     $dt->open  ($up);
     $dt->xview (moveto => .60);
     dtcmd ($up);
     } # dirnext
 
-#$dt->bind ("<less>",  \&dirup);
 $dt->bind ($_, sub {
     (my $up = $idir) =~ s:/[^/]+$:: or return;
     $dt->open  ($up);

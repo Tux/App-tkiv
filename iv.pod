@@ -109,6 +109,10 @@ the previous settings.
 	EXPERIMENTAL
 	cover the background when in slideshow mode
 
+    titledirs		=> 0
+	The number of dir levels (counted from the end) that should be included
+	in the image title
+
     maxx		=> 9999,
 	maximum horizontal resolution (some size quests are unreliable)
 

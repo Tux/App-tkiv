@@ -10,6 +10,7 @@
     * Introduce keys_quit_all
     * Add missing start with last pic key binding
     * Introduce keys_firstnext
+    * Introduce titledirs
 
 0.112 - 11 Aug 2009
     * Make X11::Protocol optional, and use $mw->screenwidth
