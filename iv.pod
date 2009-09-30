@@ -371,7 +371,6 @@ from ImageMagick is used.
 
 =item Portability
 
- - remove defined-or
  - make image format's optional (TIFF, NEF, ...)
 
 =back

@@ -73,7 +73,7 @@ provides:
     file:               iv
     version:            VERSION
 requires:                       
-  perl:                 5.010000
+  perl:                 5.008004
   Data::Peek:           0
   Getopt::Long:         2.27
   File::Copy:           0
@@ -97,7 +97,6 @@ recommends:
 configure_requires:
   ExtUtils::MakeMaker:  0
 build_requires:
-  perl:                 5.006
   Test::Harness:        0
   Test::More:           0.88
 resources:
