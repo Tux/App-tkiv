@@ -3,3 +3,4 @@ iv
 iv.pod
 Makefile.PL
 README
+t/00_pod.t
