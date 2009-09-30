@@ -1,0 +1,18 @@
+ThumbSize	= 80
+ThumbRows	= 5
+ThumbPosition	= se
+
+ImageDir	= /tmp/pics
+ImagePosition	= c
+
+SlideShowDelay	= 3000
+
+SmallFont	= {Liberation Mono} 8
+
+MaxX		= 1920
+MaxY		= 1200
+
+ConfirmDelete	= 0
+RemoveTarget	= 1
+
+keys_quit_all	= Shift-Q Control-Q Key-grave
