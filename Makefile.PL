@@ -55,7 +55,7 @@ $n_image_mod or
     die "At least one of @{[grep /^Image::/, keys %prereq_pm]} should be available\n";
 
 my %wm = (
-    NAME         => "iv",
+    NAME         => "App-tkiv",
     ABSTRACT     => "Image Viewer in Perl/Tk based on IrfanView",
     AUTHOR       => "H.Merijn Brand <h.merijn\@procura.nl>",
     VERSION_FROM => "iv",
