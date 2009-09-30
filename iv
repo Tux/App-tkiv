@@ -1217,6 +1217,10 @@ sub dirnext
 {
     (my $up = $idir) =~ s:/[^/]+$:: or return;
 
+    $dt->chdir ($up);
+    $dt->open  ($up);
+    $dt->chdir ($idir);
+
     my @dir = ($dt->child_entries ($up, 1), $idir);
     shift @dir while $dir[0] ne $idir;
     @dir > 1 && $dir[0] ne $dir[1] or return;
