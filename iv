@@ -561,7 +561,6 @@ sub dtcmd
 
 	my $pf = "$idir/$img";
 	my $ps = -s $pf or next;
-	my $data;
 
 	$opt_v and print STDERR "Read $pf ($ps) ...\n";
 	# Read it
@@ -901,8 +900,8 @@ sub dtcmd
 
 		if ($exiftool) {
 		    my $ExifOrient = sub {
-			my ($file, $o, %e) = @_;
-			my $ro = "Rotate $o CW";
+			my ($file, $ori, %e) = @_;
+			my $ro = "Rotate $ori CW";
 			$exiftool->ExtractInfo ($file, \%e);
 			(my $conv = $file) =~ s/\b(pict|hpim|dsc[_fn])(\d+)/conv$1/i;
 			$conv eq $file and $conv =~ s/(.*\.)/$1_conv/;
@@ -916,7 +915,7 @@ sub dtcmd
 				return 0;
 				}
 			    move $conv, $file;
-			    return $o;
+			    return $ori;
 			    }
 
 			my $wrn = $exiftool->GetValue ("Error");
@@ -1003,7 +1002,7 @@ sub dtcmd
 			}
 		    $pr->{angl} = 0;
 		    if (my $ph = $tn->PhotoXYXY ($pr->{phys}{file}, $sx, $sy, $ex, $ey)) {
-			my ($w, $h) = ($ex - $sx + 1, $ey - $sy + 1);
+			my ($cut_w, $cut_h) = ($ex - $sx + 1, $ey - $sy + 1);
 			$pr->{phys_org}{file} = $pr->{phys}{file};
 			$pr->{phys} = {
 			    file => $selection{file},
@@ -1012,17 +1011,17 @@ sub dtcmd
 			    titl => "Cropped ". $pr->{phys}{titl},
 			    };
 			$pr->{orig} = {
-			    hght => $h,
-			    wdth => $w,
+			    hght => $cut_h,
+			    wdth => $cut_w,
 			    phot => $ph,
 			    };
-			my ($fx, $fy) = ($cx / $w, $cy / $h);
-			my $ff = $fx < $fy ? $fx : $fy;
-			my ($fX, $fY) = map { int } ($ff * $w, $ff * $h);
+			my ($cut_fx, $cut_fy) = ($cx / $cut_w, $cy / $cut_h);
+			my $cut_ff = $cut_fx < $cut_fy ? $cut_fx : $cut_fy;
+			my ($cut_fX, $cut_fY) = map { int } ($cut_ff * $cut_w, $cut_ff * $cut_h);
 			$pr->{full} = {
 			    phot => undef,
-			    wdth => $fX,
-			    hght => $fY,
+			    wdth => $cut_fX,
+			    hght => $cut_fY,
 			    };
 			$f11->("orig");
 			}
@@ -1053,9 +1052,9 @@ sub dtcmd
 		    if ($Option{thumbrefresh} || $ti == $#tn) {
 			$tn[-1]{wdgt}->destroy;
 			foreach my $i (reverse (($ti + 1) .. $#tn)) {
-			    my $w = $tn[$i]->{wdgt} = $tn[$i - 1]{wdgt};
-			    $w->configure (-image => $tn[$i]{thmb}{phot});
-			    $w->update;
+			    my $upd_w = $tn[$i]->{wdgt} = $tn[$i - 1]{wdgt};
+			    $upd_w->configure (-image => $tn[$i]{thmb}{phot});
+			    $upd_w->update;
 			    }
 			$ni--;
 			$tr--;
