@@ -184,10 +184,14 @@ my $pic = @ARGV && -f $ARGV[-1] && $ARGV[-1] =~ s{/([^/]+)$}{} ? $1 : "";
 
 {   my @opt;
     my @ivrc_dirs = ("/etc", $ENV{HOME});
-    @ARGV && -d $ARGV[-1] and push @ivrc_dirs, $ARGV[-1];
+    if (@ARGV && -d $ARGV[-1]) {
+	push @ivrc_dirs, $ARGV[-1], $ARGV[-1];
+	$ivrc_dirs[-1] =~ s{/[^/]+/?$}{};
+	}
     foreach my $dir (@ivrc_dirs) {
 	-d $dir or next;
 	open my $of, "<", "$dir/.ivrc" or next;
+	$opt_v and print STDERR "Reading $dir/.ivrc\n";
 	while (<$of>) {
 	    m/^[#!]/		and next;
 	    s/\s+$//;
