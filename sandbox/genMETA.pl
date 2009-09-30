@@ -107,11 +107,11 @@ meta-spec:
   version:              1.4
   url:                  http://module-build.sourceforge.net/META-spec-v1.4.html
 optional_features:
-- format_tiff:
-    description:        Support for TIFF
-    requires:
-      Tk::TIFF:		0
-- X11_protocol:
+- opt_xeleven_protocol:
     description:        Use X11::Protocol to get the screen size
     requires:
-      X11::Protocol:	0
+      X11::Protocol:    0
+- opt_format_tiff:
+    description:        Support for TIFF
+    requires:
+      Tk::TIFF:         0

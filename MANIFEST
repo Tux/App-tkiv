@@ -2,5 +2,6 @@ ChangeLog
 iv
 iv.pod
 Makefile.PL
+MANIFEST
 README
 t/00_pod.t

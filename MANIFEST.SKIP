@@ -1,0 +1,16 @@
+blib
+\.old$
+\.tar\.gz$
+\.tgz$
+\.git
+\.releaserc
+blib/
+color.pl
+cover_db/
+iv-
+Makefile
+MANIFEST.SKIP
+old/
+pm_to_blib
+sandbox/
+test/
