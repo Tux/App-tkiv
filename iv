@@ -611,7 +611,11 @@ sub dtcmd
 	my $tf = $tpx / ($ry > $rx ? $ry : $rx);
 	my ($tX, $tY) = map { int } ($tf * $rx, $tf * $ry);
 
-	my $t = $tn->PhotoXY ($pf, $tX, $tY, $angl) or die "$pf: Cannot read\n";
+	my $t;
+	unless ($t = $tn->PhotoXY ($pf, $tX, $tY, $angl)) {
+	    warn "$pf: Cannot read\n";
+	    next;
+	    }
 	$tr++;
 
 	my $w = $tg->Label (-image => $t)->grid (
