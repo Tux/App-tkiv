@@ -45,7 +45,7 @@ if ($check) {
     print "Checking if $req_vsn is still OK as minimal version\n";
     use Test::MinimumVersion;
     all_minimum_version_ok ($req_vsn, { paths =>
-	["t", "examples", "Read.pm", "Makefile.PL" ]});
+	["t", "examples", "iv", "Makefile.PL" ]});
     }
 elsif ($opt_v) {
     print @yml;
@@ -69,7 +69,7 @@ author:
 generated_by:           Author
 distribution_type:      module
 provides:
-  Spreadsheet::Read:
+  App::tkiv:
     file:               iv
     version:            VERSION
 requires:                       

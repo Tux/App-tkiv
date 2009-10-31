@@ -12,7 +12,7 @@ use warnings;
     $pid and exit 0;
     } # to_background
 
-our $VERSION = 0.113;
+our $VERSION = 0.114;
 
 my %Option = (
     thumbsize		=> 80,		# in pixels

@@ -1,3 +1,6 @@
+0.114 - 31 Oct 2009
+    * META.yml declaration fix
+
 0.113 - 31 Oct 2009
     * Correct wrong eval { use ... }} checking of optional modules
     * system call now takes list to prevent quote detection
