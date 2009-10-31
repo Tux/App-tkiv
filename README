@@ -22,16 +22,15 @@ Copying:
 	       'http://repo.or.cz/w/App-tkiv.git?a=snapshot;sf=tgz'
 
 Prerequisites:
-    perl 5.006, Tk, the plethora of Tk::* image format modules, some
-    Image::* modules (see Makefile.PL and/or META.yml) and ImagaMagick
-    (not the perl module)
+    A perl with defined-or (perl 5.8.4 + defined-or, 5.10.x or higher), Tk,
+    the plethora of Tk::* image format modules, some Image::* modules (see
+    Makefile.PL and/or META.yml) and ImagaMagick (not the perl module).
 
 Build/Installation:
     Standard build/installation:
 	perl Makefile.PL
 	make test
 	make install
-    (The 'make' step cannot be omitted for perl-5.005)
 
 Author:
     H.Merijn Brand <h.m.brand@xs4all.nl>
