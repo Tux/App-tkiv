@@ -35,7 +35,8 @@ if ($check) {
     $@ and die "$@\n";
     $opt_v and print Dump $h;
     my $t = Test::YAML::Meta::Version->new (yaml => $h);
-    $t->parse () and die join "\n", $t->errors, "";
+    $t->parse () and
+	warn join "\n", "Test::YAML::Meta reported errors:", $t->errors, "";
 
     use Parse::CPAN::Meta;
     eval { Parse::CPAN::Meta::Load ($yml) };
@@ -60,7 +61,7 @@ else {
 
 __END__
 --- #YAML:1.1
-name:                   iv
+name:                   App-tkiv
 version:                VERSION
 abstract:               An image viewer in Perl::Tk based on IrfanView
 license:                perl
