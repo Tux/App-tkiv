@@ -36,7 +36,7 @@ if ($check) {
     $opt_v and print Dump $h;
     my $t = Test::YAML::Meta::Version->new (yaml => $h);
     $t->parse () and
-	warn join "\n", "Test::YAML::Meta reported errors:", $t->errors, "";
+	die join "\n", "Test::YAML::Meta reported errors:", $t->errors, "";
 
     use Parse::CPAN::Meta;
     eval { Parse::CPAN::Meta::Load ($yml) };
@@ -107,11 +107,11 @@ meta-spec:
   version:              1.4
   url:                  http://module-build.sourceforge.net/META-spec-v1.4.html
 optional_features:
-- opt_xeleven_protocol:
+  opt_xeleven_protocol:
     description:        Use X11::Protocol to get the screen size
     requires:
       X11::Protocol:    0
-- opt_format_tiff:
+  opt_format_tiff:
     description:        Support for TIFF
     requires:
       Tk::TIFF:         0
