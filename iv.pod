@@ -197,7 +197,7 @@ which iv was initially modelled
 
   keys_fullscreen
 
-    f F11		-			Switch to auto-fit
+    f F11		-			Toggle auto-fit
 
   keys_fitwidth
 
@@ -210,6 +210,11 @@ which iv was initially modelled
   keys_origsize
 
     o			-			Display in original size
+
+  keys_full_toggle
+
+    Alt-f		-			Toggle auto-fit and remember
+						for next sets
 
   keys_full_rc
 

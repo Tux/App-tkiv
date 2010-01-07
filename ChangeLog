@@ -1,3 +1,6 @@
+0.117 - 07 Jan 2010
+    * Introduce keys_full_toggle
+
 0.116 - 15 Dec 2009
     * Updated META.yml to meet most recent specs (optional_features = map)
 

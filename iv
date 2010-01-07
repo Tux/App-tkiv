@@ -43,7 +43,7 @@ my %Option = (
     titledirs		=> 0,
 
     keys_quit		=> [qw( Key-q Escape		)],
-    keys_quit_all	=> [qw( Shift-Q Control-Q	)],
+    keys_quit_all	=> [qw( Shift-q Control-q	)],
     keys_options	=> [qw( Key-o			)],
     keys_firstnext	=> [qw( Key-v			)],
     keys_firstpic	=> [qw( Key-0 Key-1  Key-a	)],
@@ -55,6 +55,7 @@ my %Option = (
     keys_fitheight	=> [qw( Key-h			)],
     keys_origsize	=> [qw( Key-o			)],
     keys_full_rc	=> [qw( Key-F			)],
+    keys_full_toggle	=> [qw( Control-f		)],
     keys_rotleft	=> [qw( Key-l			)],
     keys_rotexifl	=> [qw( Key-L			)],
     keys_rotright	=> [qw( Key-r			)],
@@ -835,6 +836,10 @@ sub dtcmd
 
 		# Toggle Full-Screen
 		$W->bind ($_, $f11) for @{$Option{keys_fullscreen}};
+		$W->bind ($_, sub {
+		    $Option{imagefull} ^= 1;
+		    $f11->($opt_f = $Option{imagefull});
+		    }) for @{$Option{keys_full_toggle}};
 
 		# Go Full-Screen and store
 		$W->bind ($_, sub {
