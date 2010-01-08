@@ -57,17 +57,17 @@ Options are case insensitive. They are read from /etc/.ivrc, ~/.ivrc,
 Not (yet) local per dir, so the last one read stays active and overrules
 the previous settings.
 
-    thumbsize		=> 80,		# in pixels
+    thumbSize		=> 80,		# in pixels
 	size of the thumbnails in the thumbview. default 80x80
 
-    thumbrows		=> 5,
+    thumbRows		=> 5,
 	number of rows in the thumbview. default 5
 
-    thumbposition	=> "se",
+    thumbPosition	=> "se",
 	position of the thumbview on the screen. default se (bottom right)
 	possible values: n, ne, e, se, s, sw, w, nw, c
 
-    thumbrefresh	=> 1,
+    thumbRefresh	=> 1,
 	when deleting images, the thumb preview is also deleted, and all
 	thumbs then have to be re-displayed in order to fill the gap. When
 	deleting images out of a long sequence, this will take a long time.
@@ -75,7 +75,7 @@ the previous settings.
 	but will cause errors/warnings when you re-visit the thumb that
 	has been deleted
 
-    thumbsorting	=> "default",
+    thumbSorting	=> "default",
 	defines the ordering of the thumbnails in the thumbview.
 
 	default	: on the numeric part of the image name, then on the full name
@@ -84,42 +84,42 @@ the previous settings.
 	size	: on (file) size
 	random	: random
 
-    thumbsortorder	=> "ascending",
+    thumbSortOrder	=> "ascending",
 	ordering of the thumbs. default ascending. possible values ascending
 	or descending
 
-    imageposition	=> "nw",
+    imagePosition	=> "nw",
 	position of the image window. default nw (top-left)
 	possible values: n, ne, e, se, s, sw, w, nw, c
 
-    imagedir		=> ".",
+    imageDir		=> ".",
 	default image dir (current folder)
 
-    slideshowdelay	=> 1500,	# in milliseconds
+    slideShowDelay	=> 1500,	# in milliseconds
 	in slide shows, define the display time for each image. default: 1500 ms
 
-    slideposition	=> "c",
+    slidePosition	=> "c",
 	position of the full image in slide-show mode. default c (center)
 	possible values: n, ne, e, se, s, sw, w, nw, c
 
-    slidefull		=> 0,
+    slideFull		=> 0,
 	display images auto-fit in slide-show mode. default 0 (off)
 
-    slidecover		=> 0,
+    slideCover		=> 0,
 	EXPERIMENTAL
 	cover the background when in slideshow mode
 
-    titledirs		=> 0
+    titleDirs		=> 0
 	The number of dir levels (counted from the end) that should be included
 	in the image title
 
-    maxx		=> 9999,
+    maxX		=> 9999,
 	maximum horizontal resolution (some size quests are unreliable)
 
-    maxy		=> 9999,
+    maxY		=> 9999,
 	maximum vertical resolution (some size quests are unreliable)
 
-    smallfont		=> "{Liberation Mono} 8",",
+    smallFont		=> "{Liberation Mono} 8",",
 	define the font for labels
 
     selectionFont	=> "{Liberation Sans} 5",
@@ -128,21 +128,25 @@ the previous settings.
     selectionColor	=> "Yellow",
 	the color used when drawing selection rectangles
 
-    confirmdelete	=> 1,
+    confirmDelete	=> 1,
 	ask for confirmation when deleting images. default 1 (true)
 
-    removetarget	=> 0,
+    removeTarget	=> 0,
 	remove target folder when it is empty. default 0 (false)
 
-    imagefull		=> 0,
+    imageFull		=> 0,
 	show images full-screen. default 0 (off). Full-screen resizes the
 	image to automatically fit the screen height or screen-width when
 	maintaining aspect ratio. Also sometimes called auto-fit.
 
-    showexifinfo	=> 0,
+    lastFirstNext	=> 0,
+	If set will cause keys_nextpic on the last pic to open the first
+	pic of the next set as if keys_firstnext was used
+
+    showExifInfo	=> 0,
 	show a summary of the exif info of the image on the image
 
-    exifinfocolor	=> "Blue",
+    exifInfoColor	=> "Blue",
 	the color if the exif info text on the image for showexifinfo
 
     decoration		=> 1,
@@ -151,7 +155,7 @@ the previous settings.
 	the borders and title bar are gone. Some refuse to do scroll bars
 	and such when the decoration is disabled. YMMV
 
-    scrollspeed		=> 3,
+    scrollSpeed		=> 3,
 	The default scroll increments for Tk::Canvas is a bit too course
 	for fine-grained scrolling. A low value enables precise positioning
 	with the scroll wheel, high values scroll fast.
@@ -185,7 +189,10 @@ which iv was initially modelled
 
   keys_nextpic
 
-    Space Right Down	Next pic (round robin)	id
+    Space Right Down	Next pic		id
+			 When LastFirstNext is false (default), this
+			 will round-robin to the first pic, otherwise
+			 it will open the first pic in the next set
 
   keys_lastpic
 

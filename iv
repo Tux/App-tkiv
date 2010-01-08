@@ -41,6 +41,7 @@ my %Option = (
     exifinfocolor	=> "Blue",
     scrollspeed		=> 3,
     titledirs		=> 0,
+    lastfirstnext	=> 0,
 
     keys_quit		=> [qw( Key-q Escape		)],
     keys_quit_all	=> [qw( Shift-q Control-q	)],
@@ -789,7 +790,7 @@ sub dtcmd
 
 	    $old_iv && Exists ($old_iv) and $old_iv->destroy;
 
-	    my ($_pic, $_next_pic);
+	    my ($_pic, $_next_pic, $_next_firstnext, $quit);
 	    $_pic = sub {
 		@tn or return;
 		$ti = shift;
@@ -802,8 +803,35 @@ sub dtcmd
 		    $aid->cancel;
 		    $aid = undef;
 		    }
-		$_pic->($ti == $#tn ? 0 : $ti + 1);
+		$ti == $#tn
+		    ? $Option{lastfirstnext}
+			? $_next_firstnext->()
+			: $_pic->(0)
+		    : $_pic->($ti + 1);
 		}; # next_pic
+
+	    $_next_firstnext = sub {
+		$quit->();
+		$opt_1 = 2;
+		dirnext ();
+		};
+
+	    # Destroy
+	    $quit = sub {
+		$sls = 0;
+		$zs  = undef;
+		if ($aid) {
+		    $aid->cancel;
+		    $aid = undef;
+		    }
+		Exists ($fp) and $fp->destroy; $fp = undef;
+		Exists ($iv) and $iv->destroy; $iv = undef;
+		Exists ($bg) and $bg->destroy; $bg = undef;
+		$mw->update;
+		#$mw->grab;
+		#$mw->focusForce;
+		#$dt->focusForce;
+		}; # sub_quit
 
 	    my $_rotate = sub {
 		$sls = 0;
@@ -863,6 +891,12 @@ sub dtcmd
 		    $_next_pic->();
 		    }) for @{$Option{keys_nextpic}};
 
+		# First pic of next set
+		$W->bind ($_, sub {
+		    $sls = 0;
+		    $_next_firstnext->();
+		    }) for @{$Option{keys_firstnext}};
+
 		# Prev pic
 		$W->bind ($_, sub {
 		    $sls = 0;
@@ -875,31 +909,8 @@ sub dtcmd
 		    $_pic->($#tn);
 		    }) for @{$Option{keys_lastpic}};
 
-		# Destroy
-		my $quit = sub {
-		    $sls = 0;
-		    $zs  = undef;
-		    if ($aid) {
-			$aid->cancel;
-			$aid = undef;
-			}
-		    Exists ($fp) and $fp->destroy; $fp = undef;
-		    Exists ($iv) and $iv->destroy; $iv = undef;
-		    Exists ($bg) and $bg->destroy; $bg = undef;
-		    $mw->update;
-		    #$mw->grab;
-		    #$mw->focusForce;
-		    #$dt->focusForce;
-		    }; # sub_quit
-
 		$W->bind ($_, $quit)	for @{$Option{keys_quit}};
 		$W->bind ($_, \&exit)	for @{$Option{keys_quit_all}};
-
-		$W->bind ($_, sub {
-		    $quit->();
-		    $opt_1 = 2;
-		    dirnext ();
-		    }) for @{$Option{keys_firstnext}};
 
 		# Rotate right
 		$W->bind ($_, sub {
