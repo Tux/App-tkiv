@@ -183,6 +183,7 @@ eval {
 -x "/usr/bin/exiftran" and $exiftran = 1;
 
 my $pic = @ARGV && -f $ARGV[-1] && $ARGV[-1] =~ s{/([^/]+)$}{} ? $1 : "";
+   $pic and $opt_1 = 0;
 
 {   my @opt;
     my @ivrc_dirs = ("/etc", $ENV{HOME});
@@ -560,6 +561,8 @@ sub dtcmd
     $Option{thumbsortorder} =~ m/^(?:desc|reverse)/ and @img = reverse @img;
 
 #my $t0 = [ gettimeofday ];
+    my $earlyopennextdir = $Option{lastfirstnext} || $opt_1;
+
     $ni = @img;
     $opt_v and print STDERR "$ni images in $idir\n";
     foreach my $img (@img) {
@@ -1180,12 +1183,10 @@ sub dtcmd
 
 	# Display the thumbnail
 	$w->update;
-	}
 
-    if ($opt_1) {
-	my $action = $opt_1;
-	$opt_1 = 0;
-	if (@tn) {
+	if ($opt_1 && $tr == 1) {
+	    my $action = $opt_1;
+	    $opt_1 = 0;
 	    $ti = 0;
 	    $f11->($vs);
 	    $action == 1 and $mw->iconify;
@@ -1195,6 +1196,7 @@ sub dtcmd
 	}
 
     $refreshing = "";
+    $earlyopennextdir and openupdir ();
     }; # dtcmd
 
 # Still need to find out how to (optionally) hide everything that
@@ -1237,15 +1239,22 @@ sub dirup
     dtcmd ($up);
     } # dirup
 
-sub dirnext
+sub openupdir
 {
     (my $up = $idir) =~ s:/[^/]+$:: or return;
 
     $dt->chdir ($up);
     $dt->open  ($up);
     $dt->chdir ($idir);
+    return ($dt->child_entries ($up, 1), $idir);
+    } # openupdir
 
-    my @dir = ($dt->child_entries ($up, 1), $idir);
+sub dirnext
+{
+    (my $up = $idir) =~ s:/[^/]+$:: or return;
+
+    my @dir = openupdir ();
+
     shift @dir while $dir[0] ne $idir;
     @dir > 1 && $dir[0] ne $dir[1] or return;
 
