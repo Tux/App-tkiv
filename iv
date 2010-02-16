@@ -562,6 +562,10 @@ sub dtcmd
 
 #my $t0 = [ gettimeofday ];
     my $earlyopennextdir = $Option{lastfirstnext} || $opt_1;
+    if ($earlyopennextdir && opendir my $dh, "..") {
+	my @dir = readdir $dh;
+	@dir > 100 and $earlyopennextdir = 0; # too slow
+	}
 
     $ni = @img;
     $opt_v and print STDERR "$ni images in $idir\n";
