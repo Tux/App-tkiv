@@ -60,7 +60,7 @@ else {
     }
 
 __END__
---- #YAML:1.1
+--- #YAML:1.0
 name:                   App-tkiv
 version:                VERSION
 abstract:               An image viewer in Perl::Tk based on IrfanView
