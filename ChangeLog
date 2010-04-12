@@ -1,8 +1,9 @@
-0.117 - 16 Mar 2010
+0.120 - 12 Apr 2010
     * Introduce keys_full_toggle
     * Introduce lastFirstNext option
     * Hugely speed up user experience on firstNext and lastFirstNext
     * Dropped YAML spec to 1.0
+    * Moved pod to App::tkiv
 
 0.116 - 15 Dec 2009
     * Updated META.yml to meet most recent specs (optional_features = map)

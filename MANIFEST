@@ -2,6 +2,7 @@ ChangeLog
 examples/.ivrc
 iv
 iv.pod
+lib/App/tkiv.pm
 Makefile.PL
 MANIFEST
 README

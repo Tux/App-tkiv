@@ -12,7 +12,7 @@ use warnings;
     $pid and exit 0;
     } # to_background
 
-our $VERSION = 0.116;
+eval q{use App::tkiv; $VERSION = $App::tkiv::VERSION};
 
 my %Option = (
     thumbsize		=> 80,		# in pixels

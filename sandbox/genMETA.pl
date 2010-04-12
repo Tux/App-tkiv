@@ -71,7 +71,7 @@ generated_by:           Author
 distribution_type:      module
 provides:
   App::tkiv:
-    file:               iv
+    file:               lib/App/tkiv.pm
     version:            VERSION
 requires:                       
   perl:                 5.008004
