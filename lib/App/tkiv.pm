@@ -5,7 +5,7 @@ package App::tkiv;
 use strict;
 use warnings;
 
-our $VERSION = 0.120;
+our $VERSION = "0.120";
 
 1;
 

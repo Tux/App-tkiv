@@ -12,13 +12,14 @@ GetOptions (
     ) or die "usage: $0 [--check]\n";
 
 my $version;
-open my $pm, "<", "iv" or die "Cannot read iv";
+open my $pm, "<", "iv.pod" or die "Cannot read iv";
 while (<$pm>) {
     m/^our\s+.VERSION\s*=\s*"?([-0-9._]+)"?\s*;\s*$/ or next;
-    $version = $1;
+    $version = "$1";
     last;
     }
 close $pm;
+print STDERR "App::tkiv-$version is being analized and packaged\n";
 
 my @yml;
 while (<DATA>) {
