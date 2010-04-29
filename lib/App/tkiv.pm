@@ -5,7 +5,7 @@ package App::tkiv;
 use strict;
 use warnings;
 
-our $VERSION = "0.120";
+our $VERSION = "0.121";
 
 1;
 
@@ -294,6 +294,10 @@ which iv was initially modelled
 						you might loose control or key
 						bindings.
 
+  keys_focusthumbs
+
+    t			-			Restore and focus thumbnails
+
   keys_imgpos_nw
 
     Alt-u		-			Set image position to nw
@@ -419,7 +423,7 @@ personal use, but was asked to make it publicly available as application.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2004-2009 H.Merijn Brand
+Copyright (C) 2004-2010 H.Merijn Brand
 
 This software is free; you can redistribute it and/or modify
 it under the same terms as Perl itself.

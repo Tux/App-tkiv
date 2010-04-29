@@ -68,6 +68,7 @@ my %Option = (
     keys_exif		=> [qw( Key-i			)],
     keys_exifinfo	=> [qw( Shift-I			)],
     keys_decoration	=> [qw( Key-d			)],
+    keys_focusthumbs	=> [qw( Key-t			)],
 
     keys_scroll_up	=> [qw( Alt-Up    Control-Up	)],
     keys_scroll_down	=> [qw( Alt-Down  Control-Down	)],
@@ -892,6 +893,14 @@ sub dtcmd
 		    $_pic->(0);
 		    }) for @{$Option{keys_firstpic}};
 
+
+		# Restore and focus thumbnail window
+		$W->bind ($_, sub {
+		    $mw->deiconify;
+		    $mw->raise;
+		    $mw->focusForce;
+		    }) for @{$Option{keys_focusthumbs}};
+
 		# Next pic
 		$W->bind ($_, sub {
 		    $sls = 0;
@@ -1194,6 +1203,7 @@ sub dtcmd
 	    $ti = 0;
 	    $f11->($vs);
 	    $action == 1 and $mw->iconify;
+	    $iv->deiconify;
 	    $iv->raise;
 	    $iv->focusForce;
 	    }
