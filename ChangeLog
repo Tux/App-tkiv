@@ -1,6 +1,7 @@
 0.121 - 03 Jun 2010
     * Introduce keys_focusthumbs
     * Introduce titleIndex
+    * Update examples/.ivrc
 
 0.120 - 12 Apr 2010
     * Introduce keys_full_toggle
