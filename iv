@@ -41,6 +41,7 @@ my %Option = (
     exifinfocolor	=> "Blue",
     scrollspeed		=> 3,
     titledirs		=> 0,
+    titleindex		=> 0,
     lastfirstnext	=> 0,
 
     keys_quit		=> [qw( Key-q Escape		)],
@@ -714,7 +715,9 @@ sub dtcmd
 		$bg->update;
 		}
 
-	    $iv = $mw->Toplevel (-title => $pr->{phys}{titl});
+	    my $ttl = $pr->{phys}{titl};
+	    $Option{titleindex} and $ttl .= " ".($ti + 1)."/$ni";
+	    $iv = $mw->Toplevel (-title => $ttl);
 	    $iv->geometry (loc ($sls ? $sp : $ip, $pr->{$size}{wdth}, $pr->{$size}{hght}));
 	    my $fp = $iv->Canvas (
 		-width  => $pr->{$size}{wdth},

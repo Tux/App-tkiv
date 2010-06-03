@@ -126,6 +126,12 @@ the previous settings.
 	The number of dir levels (counted from the end) that should be included
 	in the image title
 
+    titleIndex		=> 0
+	display the index of the image in the image title. (default off)
+	When on, the title of the image window is extended with " n/N", where
+	n is the index and N is the total number of images in the current
+	thumb-view
+
     maxX		=> 9999,
 	maximum horizontal resolution (some size quests are unreliable)
 
