@@ -4,10 +4,13 @@ ThumbPosition	= se
 
 ImageDir	= /tmp/pics
 ImagePosition	= c
+TitleDirs	= 1
+TitleIndex	= 1
 
 SlideShowDelay	= 3000
 
-SmallFont	= {Liberation Mono} 8
+SmallFont	= {DejaVu Sans Mono} 8
+SelectionFont	= {DejaVu Sans} 6
 
 MaxX		= 1920
 MaxY		= 1200
