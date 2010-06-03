@@ -28,6 +28,18 @@ while (<DATA>) {
     }
 
 if ($check) {
+    print STDERR "Check required and recommended module versions ...\n";
+    BEGIN { $V::NO_EXIT = $V::NO_EXIT = 1 } require V;
+    my %vsn = map { m/^\s*([\w:]+):\s+([0-9.]+)$/ ? ($1, $2) : () } @yml;
+    delete @vsn{qw( perl version )};
+    for (sort keys %vsn) {
+	$vsn{$_} eq "0" and next;
+	my $v = V::get_version ($_);
+	$v eq $vsn{$_} and next;
+	printf STDERR "%-35s %-6s => %s\n", $_, $vsn{$_}, $v;
+	}
+
+    print STDERR "Checking generated YAML ...\n";
     use YAML::Syck;
     use Test::YAML::Meta::Version;
     my $h;
@@ -66,7 +78,7 @@ name:                   App-tkiv
 version:                VERSION
 abstract:               An image viewer in Perl::Tk based on IrfanView
 license:                perl
-author:                 
+author:
   - H.Merijn Brand <h.m.brand@xs4all.nl>
 generated_by:           Author
 distribution_type:      module
@@ -74,7 +86,7 @@ provides:
   App::tkiv:
     file:               lib/App/tkiv.pm
     version:            VERSION
-requires:                       
+requires:
   perl:                 5.008004
   Data::Peek:           0
   Getopt::Long:         2.27
@@ -95,12 +107,16 @@ requires:
   Image::Size:          0
   Image::Info:          0
 recommends:
-  perl:                 5.010001
+  perl:                 5.012001
+  Getopt::Long:         2.38
+  Tk:                   804.029
 configure_requires:
   ExtUtils::MakeMaker:  0
 build_requires:
   Test::Harness:        0
   Test::More:           0.88
+build_recommends:
+  Test::More:           0.94
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           http://repo.or.cz/w/App-tkiv.git
