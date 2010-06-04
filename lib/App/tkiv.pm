@@ -5,7 +5,7 @@ package App::tkiv;
 use strict;
 use warnings;
 
-our $VERSION = "0.121";
+our $VERSION = "0.122";
 
 1;
 
@@ -64,8 +64,9 @@ and minimize the thumnail view.
 
 =head2 Options
 
-Options are case insensitive. They are read from /etc/.ivrc, ~/.ivrc,
-./.ivrc, or image_dir/.ivrc (in that order if available).
+Options are case insensitive. They are read from /etc/iv.rc, /etc/.ivrc,
+~/iv.rc, ~/.ivrc, ./iv.rc, ./.ivrc, image_dir/iv.rc and image_dir/.ivrc
+(in that order if available).
 
 Not (yet) local per dir, so the last one read stays active and overrules
 the previous settings.

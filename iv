@@ -195,15 +195,17 @@ my $pic = @ARGV && -f $ARGV[-1] && $ARGV[-1] =~ s{/([^/]+)$}{} ? $1 : "";
 	}
     foreach my $dir (@ivrc_dirs) {
 	-d $dir or next;
-	open my $of, "<", "$dir/.ivrc" or next;
-	$opt_v and print STDERR "Reading $dir/.ivrc\n";
-	while (<$of>) {
-	    m/^[#!]/		and next;
-	    s/\s+$//;
-	    m/^\S+\s*=\s*\S/	or  next;
-	    push @opt, $_;
+	foreach my $rcf ("iv.rc", ".ivrc") {
+	    open my $of, "<", "$dir/.ivrc" or next;
+	    $opt_v and print STDERR "Reading $dir/.ivrc\n";
+	    while (<$of>) {
+		m/^[#!]/		and next;
+		s/\s+$//;
+		m/^\S+\s*=\s*\S/	or  next;
+		push @opt, $_;
+		}
+	    close $of;
 	    }
-	close $of;
 	}
     foreach my $opt (split m/[:;]/ => $ENV{IVRC} || "") {
 	$opt =~ s{^[-/]?(\S+\s*=\s*\S.*)}{$1} or next;
