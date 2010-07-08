@@ -222,6 +222,10 @@ which iv was initially modelled
 
     v			-			Open first pic in next folder
 
+  keys_firstprev
+
+    ^			-			Open first pic in prev folder
+
   keys_fullscreen
 
     f F11		-			Toggle auto-fit
@@ -396,6 +400,8 @@ from ImageMagick is used.
 
  - Hide dirs above dt root
  - Allow a set of dirs from the command line
+ - Make pirstnext and firstprev look in the original folder if the
+   image folder actually been viewed is a symlink in the parent folder
 
 =item Animation
 

@@ -48,6 +48,7 @@ my %Option = (
     keys_quit_all	=> [qw( Shift-q Control-q	)],
     keys_options	=> [qw( Key-o			)],
     keys_firstnext	=> [qw( Key-v			)],
+    keys_firstprev	=> [qw( asciicircum		)],
     keys_firstpic	=> [qw( Key-0 Key-1  Key-a	)],
     keys_prevpic	=> [qw( Left  Up     BackSpace	)],
     keys_nextpic	=> [qw( Right Down   space	)],
@@ -803,7 +804,7 @@ sub dtcmd
 
 	    $old_iv && Exists ($old_iv) and $old_iv->destroy;
 
-	    my ($_pic, $_next_pic, $_next_firstnext, $quit);
+	    my ($_pic, $_next_pic, $_next_firstnext, $_next_firstprev, $quit);
 	    $_pic = sub {
 		@tn or return;
 		$ti = shift;
@@ -827,6 +828,12 @@ sub dtcmd
 		$quit->();
 		$opt_1 = 2;
 		dirnext ();
+		};
+
+	    $_next_firstprev = sub {
+		$quit->();
+		$opt_1 = 2;
+		dirprev ();
 		};
 
 	    # Destroy
@@ -917,6 +924,12 @@ sub dtcmd
 		    $sls = 0;
 		    $_next_firstnext->();
 		    }) for @{$Option{keys_firstnext}};
+
+		# First pic of prev set
+		$W->bind ($_, sub {
+		    $sls = 0;
+		    $_next_firstprev->();
+		    }) for @{$Option{keys_firstprev}};
 
 		# Prev pic
 		$W->bind ($_, sub {
@@ -1285,6 +1298,25 @@ sub dirnext
     $dt->xview (moveto => .60);
     dtcmd ($up);
     } # dirnext
+
+sub dirprev
+{
+    (my $up = $idir) =~ s:/[^/]+$:: or return;
+
+    my @dir = reverse openupdir ();
+
+    shift @dir while $dir[0] ne $idir;
+    @dir > 1 && $dir[0] ne $dir[1] or return;
+
+    # print STDERR "$idir => $up => $dir[0]\n";
+    $dt->close ($idir);
+    $dt->chdir ($up);
+    $dt->open  ($up);
+    $dt->chdir ($up = $dir[0]);
+    $dt->open  ($up);
+    $dt->xview (moveto => .60);
+    dtcmd ($up);
+    } # dirprev
 
 $dt->bind ($_, sub {
     (my $up = $idir) =~ s:/[^/]+$:: or return;
