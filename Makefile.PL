@@ -78,7 +78,10 @@ sub postamble
 	    ''
 	: "";
     join "\n" =>
-	'checkmeta:',
+	'spellcheck:',
+	'	pod-spell-check --aspell',
+	'',
+	'checkmeta:	spellcheck',
 	'	perl sandbox/genMETA.pl -c',
 	'',
 	'fixmeta:	distmeta',

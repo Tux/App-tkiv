@@ -48,7 +48,7 @@ the level to 1.
 
 =item -f
 
-Start in full-screen mode. Thumnail view will not be full-screen, but the
+Start in full-screen mode. Thumbnail view will not be full-screen, but the
 displayed images will. This overrules the default option from .ivrc files.
 
 =item -s
@@ -58,7 +58,7 @@ Start the slideview on open automatically.
 =item -1
 
 After populating the thumbnail view, immediately display the first image
-and minimize the thumnail view.
+and minimize the thumbnail view.
 
 =back
 
@@ -183,7 +183,7 @@ the previous settings.
 =head2 Key bindings
 
 Key bindings. Most are the same as the windows program IrfanView, after
-which iv was initially modelled
+which iv was initially modeled
 
 			Thumb view		Image view
   keys_quit
