@@ -116,7 +116,7 @@ build_requires:
   Test::Harness:        0
   Test::More:           0.88
 build_recommends:
-  Test::More:           0.94
+  Test::More:           0.96
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           http://repo.or.cz/w/App-tkiv.git
