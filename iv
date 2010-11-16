@@ -1305,15 +1305,15 @@ sub dirprev
     (my $up = $idir) =~ s:/[^/]+$:: or return;
 
     my @dir = reverse openupdir ();
+    push @dir, shift @dir;
 
     shift @dir while $dir[0] ne $idir;
     @dir > 1 && $dir[0] ne $dir[1] or return;
 
-    # print STDERR "$idir => $up => $dir[0]\n";
     $dt->close ($idir);
     $dt->chdir ($up);
     $dt->open  ($up);
-    $dt->chdir ($up = $dir[0]);
+    $dt->chdir ($up = $dir[1]);
     $dt->open  ($up);
     $dt->xview (moveto => .60);
     dtcmd ($up);
