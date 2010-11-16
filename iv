@@ -525,10 +525,11 @@ sub dtcmd
     # trigger $tn to show thumbnails of all pics in current dir
     # Expansion also invokes this callback
     @_ == 1                or return;
-    $idir = realpath $_[0] or return ($refreshing = "");
-    #print STDERR "dtcmd (idir = $idir)\n";
-    $refreshing eq $idir  and return;
-    $refreshing = $idir;
+    $idir = $_[0]	   or return ($refreshing = "");
+    my $Idir = realpath $idir;
+    #print STDERR "dtcmd (idir = $idir ($Idir))\n";
+    $refreshing eq $Idir  and return;
+    $refreshing = $Idir;
 
     # Clean up previous pics
     $iv && Exists ($iv) and $iv->destroy;
@@ -540,7 +541,7 @@ sub dtcmd
     # New dir, reset globals
     ($tr, $or, $fr, $ti, $vs, $sls, $zs, $f11, @tn) = (0, 0, 0, -1, $opt_f, 0);
 
-    (my $ttl = $idir) =~ s{^$ENV{HOME}}{~};
+    (my $ttl = $Idir) =~ s{^$ENV{HOME}}{~};
 	$ttl =~ s{^~/\.wine/fake_windows/}{:};
     utf8::upgrade ($ttl);
     $mw->title ($ttl);
@@ -553,12 +554,12 @@ sub dtcmd
 	);
 
     # Gather all pics in this folder
-    opendir IDIR, $idir;
+    opendir IDIR, $Idir;
     my @img = map  { $_->[0] }
 	      sort { $tsort{$Option{thumbsorting}}->() }
 	      map  { my $seq = m/(\d+)/ ? $1 : 0;
-	             [ $_, $seq, (stat"$idir/$_")[7,9], lc $_, rand 1 ] }
-	      grep { my $s = -s "$idir/$_"; $s and $s > 100 } # Sanity check. Minimal image size 100
+	             [ $_, $seq, (stat "$Idir/$_")[7,9], lc $_, rand 1 ] }
+	      grep { my $s = -s "$Idir/$_"; $s and $s > 100 } # Sanity check. Minimal image size 100
 	      # convert can't deal with .ico files (yet)
 	      # Tk can deal with Tiff/NEF as of 804.027_501 with Tk::TIFF
 	      grep m/\.(jpe?g|gif|x[pb]m|png|bmp|tiff?|nef)$/i => readdir IDIR;
@@ -577,7 +578,7 @@ sub dtcmd
     foreach my $img (@img) {
 	my $nt = @tn;
 
-	my $pf = "$idir/$img";
+	my $pf = "$Idir/$img";
 	my $ps = -s $pf or next;
 
 	$opt_v and print STDERR "Read $pf ($ps) ...\n";
@@ -892,7 +893,7 @@ sub dtcmd
 		# Go Full-Screen and store
 		$W->bind ($_, sub {
 		    $Option{imagefull} = 1;
-		    if (open my $ivrc, ">>", "$idir/.ivrc") {
+		    if (open my $ivrc, ">>", "$Idir/.ivrc") {
 			print $ivrc "ImageFull\t= 1\n";
 			close $ivrc;
 			}
@@ -1128,7 +1129,7 @@ sub dtcmd
 			$f11->($vs);
 			}
 		    else {
-			$Option{removetarget} and rmdir $idir;
+			$Option{removetarget} and rmdir $Idir;
 			$refreshing = "";
 			-d $idir ? dtcmd ($idir) : dirup ();
 			}
