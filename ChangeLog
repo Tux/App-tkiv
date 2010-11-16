@@ -1,5 +1,6 @@
 0.123 - 16 Nov 2010
     * Follow original path when targets are sym-linked instead of realpath
+    * Don't expand thumbs when resizing main window
 
 0.122 - 11 Aug 2010
     * Allow iv.rc as well

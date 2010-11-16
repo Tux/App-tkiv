@@ -1351,7 +1351,7 @@ $tn = $mw->Scrolled ("Frame",
     -height     => .65 * $cy,
 
     -scrollbars => "osoe",
-    )->pack (-anchor => "nw", -side => "right", @dpo);
+    )->pack (-anchor => "nw", -side => "right", -expand => 0, -fill => "both");
 $tn->Subwidget ("${_}scrollbar")->configure (-width => 6) for qw( x y );
 $tg = $tn->Subwidget ("scrolled");
 bind_wheel ($mw, $tn, 10);
