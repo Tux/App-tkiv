@@ -43,6 +43,7 @@ my %Option = (
     titledirs		=> 0,
     titleindex		=> 0,
     lastfirstnext	=> 0,
+    dirtreestartpos	=> 0.,
 
     keys_quit		=> [qw( Key-q Escape		)],
     keys_quit_all	=> [qw( Shift-q Control-q	)],
@@ -1384,6 +1385,8 @@ foreach my $W ($df, $dt, $tn, $tg, $mw) {	# not $mw, would cause double starts
 $mw->bind ($_, \&options) for @{$Option{keys_options}};
 
 dtcmd ($dir);
+$dt->update;
+$dt->yview (moveto => $Option{dirtreestartpos});
 
 #$dt->focusForce;
 
