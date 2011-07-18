@@ -960,26 +960,33 @@ sub dtcmd
 
 		if ($exiftool) {
 		    my $ExifOrient = sub {
-			my ($file, $ori, %e) = @_;
+			my ($file, $ori) = @_;
 			my $ro = "Rotate $ori CW";
-			$exiftool->ExtractInfo ($file, \%e);
+			my $et = Image::ExifTool->new ();
+			my $e = $et->ImageInfo ($file) or die;
 			(my $conv = $file) =~ s/\b(pict|hpim|dsc[_fn])(\d+)/conv$1/i;
 			$conv eq $file and $conv =~ s/(.*\.)/$1_conv/;
-			$exiftool->SetNewValue ("Orientation" => $ro);
-			$exiftool->SetNewValue ("Rotation"    => "Horizontal");
-			if ($exiftool->WriteInfo ($file, $conv)) {
-			    unlink $file;
+			$et->SetNewValue ("Orientation" => $ro);
+			$et->SetNewValue ("Rotation"    => "Horizontal");
+			if ($et->WriteInfo ($file, $conv)) {
+			    -s $conv or die "ExifTool::WriteInfo failed!";
 			    if ($exiftran) {
-				qx{exiftran -a -o '$file' '$conv'};
-				unlink $conv;
-				return 0;
+				(my $etf = $conv) =~ s/conv/conv_et$$/;
+				system "exiftran", "-a", "-o", $etf, $conv;
+				if (-s $etf) {
+				    unlink $conv, $file;
+				    move $etf, $file;
+				    return 0;
+				    }
+				warn "exiftran failed (again)\n";
 				}
+			    unlink $file;
 			    move $conv, $file;
 			    return $ori;
 			    }
 
-			my $wrn = $exiftool->GetValue ("Error");
-			my $err = $exiftool->GetValue ("Warning");
+			my $wrn = $et->GetValue ("Error");
+			my $err = $et->GetValue ("Warning");
 			my $msg = "Cannot write converted file $conv:\n";
 			$err and $msg .= "   $err\n";
 			$wrn and $msg .= "   $wrn\n";
