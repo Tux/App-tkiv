@@ -12,7 +12,7 @@ use warnings;
     $pid and exit 0;
     } # to_background
 
-eval q{use App::tkiv; $VERSION = $App::tkiv::VERSION};
+our $VERSION = eval q{use App::tkiv; $App::tkiv::VERSION};
 
 my %Option = (
     thumbsize		=> 80,		# in pixels
@@ -54,6 +54,7 @@ my %Option = (
     keys_prevpic	=> [qw( Left  Up     BackSpace	)],
     keys_nextpic	=> [qw( Right Down   space	)],
     keys_lastpic	=> [qw( Key-9 Key-z		)],
+    keys_firstminimize	=> [qw( Alt-1 exclam Control-1	)],
     keys_fullscreen	=> [qw( Key-f F11		)],
     keys_fitwidth	=> [qw( Key-b			)],
     keys_fitheight	=> [qw( Key-h			)],
@@ -907,6 +908,15 @@ sub dtcmd
 		    $_pic->(0);
 		    }) for @{$Option{keys_firstpic}};
 
+		# First pic and minimize thumbnails
+		$W->bind ($_, sub {
+		    $sls = 0;
+		    $_pic->(0);
+		    $mw->iconify;
+		    $iv->deiconify;
+		    $iv->raise;
+		    $iv->focusForce;
+		    }) for @{$Option{keys_firstminimize}};
 
 		# Restore and focus thumbnail window
 		$W->bind ($_, sub {
