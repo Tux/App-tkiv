@@ -11,65 +11,25 @@ GetOptions (
     "v|verbose:1"	=> \$opt_v,
     ) or die "usage: $0 [--check]\n";
 
-my $version;
-open my $pm, "<", "iv.pod" or die "Cannot read iv";
-while (<$pm>) {
-    m/^our\s+.VERSION\s*=\s*"?([-0-9._]+)"?\s*;\s*$/ or next;
-    $version = "$1";
-    last;
-    }
-close $pm;
-print STDERR "App::tkiv-$version is being analized and packaged\n";
+use lib "sandbox";
+use genMETA;
+my $meta = genMETA->new (
+    from    => "iv.pod",
+    verbose => $opt_v,
+    );
 
-my @yml;
-while (<DATA>) {
-    s/VERSION/$version/o;
-    push @yml, $_;
-    }
+$meta->from_data (<DATA>);
 
 if ($check) {
-    print STDERR "Check required and recommended module versions ...\n";
-    BEGIN { $V::NO_EXIT = $V::NO_EXIT = 1 } require V;
-    my %vsn = map { m/^\s*([\w:]+):\s+([0-9.]+)$/ ? ($1, $2) : () } @yml;
-    delete @vsn{qw( perl version )};
-    for (sort keys %vsn) {
-	$vsn{$_} eq "0" and next;
-	my $v = V::get_version ($_);
-	$v eq $vsn{$_} and next;
-	printf STDERR "%-35s %-6s => %s\n", $_, $vsn{$_}, $v;
-	}
-
-    print STDERR "Checking generated YAML ...\n";
-    use YAML::Syck;
-    use Test::YAML::Meta::Version;
-    my $h;
-    my $yml = join "", @yml;
-    eval { $h = Load ($yml) };
-    $@ and die "$@\n";
-    $opt_v and print Dump $h;
-    my $t = Test::YAML::Meta::Version->new (yaml => $h);
-    $t->parse () and
-	die join "\n", "Test::YAML::Meta reported errors:", $t->errors, "";
-
-    use Parse::CPAN::Meta;
-    eval { Parse::CPAN::Meta::Load ($yml) };
-    $@ and die "$@\n";
-
-    my $req_vsn = $h->{requires}{perl};
-    print "Checking if $req_vsn is still OK as minimal version\n";
-    use Test::MinimumVersion;
-    all_minimum_version_ok ($req_vsn, { paths =>
-	["t", "examples", "iv", "Makefile.PL" ]});
+    $meta->check_encoding ();
+    $meta->check_required ();
+    $meta->check_minimum ([ "t", "examples", "iv", "Makefile.PL" ]);
     }
 elsif ($opt_v) {
-    print @yml;
+    $meta->print_yaml ();
     }
 else {
-    my @my = glob <*/META.yml>;
-    @my == 1 && open my $my, ">", $my[0] or die "Cannot update META.yml\n";
-    print $my @yml;
-    close $my;
-    chmod 0644, $my[0];
+    $meta->fix_meta ();
     }
 
 __END__
@@ -87,7 +47,7 @@ provides:
     file:               lib/App/tkiv.pm
     version:            VERSION
 requires:
-  perl:                 5.008004
+  perl:                 5.010
   Data::Peek:           0
   Getopt::Long:         2.27
   File::Copy:           0
@@ -107,16 +67,16 @@ requires:
   Image::Size:          0
   Image::Info:          0
 recommends:
-  perl:                 5.012001
+  perl:                 5.014001
   Getopt::Long:         2.38
-  Tk:                   804.029
+  Tk:                   804.029_500
 configure_requires:
   ExtUtils::MakeMaker:  0
-build_requires:
+test_requires:
   Test::Harness:        0
   Test::More:           0.88
-build_recommends:
-  Test::More:           0.96
+test_recommends:
+  Test::More:           0.98
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           http://repo.or.cz/w/App-tkiv.git

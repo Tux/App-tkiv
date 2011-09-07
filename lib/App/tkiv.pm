@@ -261,24 +261,24 @@ which iv was initially modeled
 
   keys_rotleft
 
-    l			-			Rotate image left (90°
+    l			-			Rotate image left (90Â°
 						anti-clockwise)
 
   keys_rotexifl
 
-    L			-			Rotate image left (90° anti-
+    L			-			Rotate image left (90Â° anti-
 						clockwise) in the EXIF info,
 						and store the change in the
 						image file
 
   keys_rotright
 
-    r			-			Rotate image right (90°
+    r			-			Rotate image right (90Â°
 						clockwise)
 
   keys_rotexifr
 
-    R			-			Rotate image right (90°
+    R			-			Rotate image right (90Â°
 						clockwise) in the EXIF info,
 						and store the change in the
 						image file
