@@ -1,8 +1,9 @@
 0.124 - 07 Sep 2011
+    * NAME / DISTNAME in Makefile.PL
+
+0.123 - 07 Sep 2011
     * Safeguard on failing exiftran
     * More cross-checks for META data
-
-0.123 - 02 Dec 2010
     * Follow original path when targets are sym-linked instead of realpath
     * Don't expand thumbs when resizing main window
     * Make firstprev work
