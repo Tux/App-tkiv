@@ -11,6 +11,8 @@ our $VERSION = "0.125";
 
 __END__
 
+=encoding UTF-8
+
 =head1 NAME
 
 App::tkiv - An image viewer in Perl::Tk based on IrfanView
