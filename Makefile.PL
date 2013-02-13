@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-require 5.008;
+require 5.010;
 
 {   # Check if I have a perl that supports defined-or
     $a = undef;
@@ -63,6 +63,7 @@ my %wm = (
     EXE_FILES    => [ @exe ],
     PREREQ_FATAL => 0,
     PREREQ_PM    => \%prereq_pm,
+    macro        => { TARFLAGS => "--format=ustar -c -v -f", },
     );
 $ExtUtils::MakeMaker::VERSION > 6.30 and $wm{LICENSE} = "perl";
 

@@ -67,7 +67,7 @@ requires:
   Image::Size:          0
   Image::Info:          0
 recommends:
-  perl:                 5.014002
+  perl:                 5.016002
   Getopt::Long:         2.38
   Tk:                   804.030
 configure_requires:
