@@ -561,7 +561,13 @@ sub dtcmd
 	      sort { $tsort{$Option{thumbsorting}}->() }
 	      map  { my $seq = m/(\d+)/ ? $1 : 0;
 	             [ $_, $seq, (stat "$Idir/$_")[7,9], lc $_, rand 1 ] }
-	      grep { my $s = -s "$Idir/$_"; $s and $s > 100 } # Sanity check. Minimal image size 100
+	      grep { my $if = "$Idir/$_";
+		     # Sanity check. Minimal image size 100
+		     my $s = -s $if;
+		     # Skip MacOS working copies
+		     $if =~ s{/\._([^/]+)$}{/$1} && -s $if and $s = 0;
+		     $s and $s > 100;
+		     }
 	      # convert can't deal with .ico files (yet)
 	      # Tk can deal with Tiff/NEF as of 804.027_501 with Tk::TIFF
 	      grep m/\.(jpe?g|gif|x[pb]m|png|bmp|tiff?|nef)$/i => readdir IDIR;
