@@ -307,10 +307,10 @@ sub bind_wheel
 {
     my ($w, $sw, $u) = @_;
 
-    $w->bind ($_, sub { $sw->yview (scroll => -$u, "units") }) for "<4>",            @{$Option{keys_scroll_up}};
-    $w->bind ($_, sub { $sw->yview (scroll =>  $u, "units") }) for "<5>",            @{$Option{keys_scroll_down}};
-    $w->bind ($_, sub { $sw->xview (scroll => -$u, "units") }) for "<Alt-Button-4>", @{$Option{keys_scroll_left}};
-    $w->bind ($_, sub { $sw->xview (scroll =>  $u, "units") }) for "<Alt-Button-5>", @{$Option{keys_scroll_right}};
+    $w->bind ($_, sub { $sw->yview (scroll => -$u, "units") }) for "<4>", @{$Option{keys_scroll_up}};
+    $w->bind ($_, sub { $sw->yview (scroll =>  $u, "units") }) for "<5>", @{$Option{keys_scroll_down}};
+    $w->bind ($_, sub { $sw->xview (scroll => -$u, "units") }) for "<6>", @{$Option{keys_scroll_left}},  "<Alt-Button-4>", "<Control-Button-4>", "<Shift-Button-4>";
+    $w->bind ($_, sub { $sw->xview (scroll =>  $u, "units") }) for "<7>", @{$Option{keys_scroll_right}}, "<Alt-Button-5>", "<Control-Button-5>", "<Shift-Button-5>";
     } # bind_wheel
 
 my $pxyid = 10000;
