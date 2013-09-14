@@ -67,9 +67,9 @@ requires:
   Image::Size:          0
   Image::Info:          0
 recommends:
-  perl:                 5.016003
-  Getopt::Long:         2.39
-  Tk:                   804.030
+  perl:                 5.018001
+  Getopt::Long:         2.41
+  Tk:                   804.031
 configure_requires:
   ExtUtils::MakeMaker:  0
 test_requires:
