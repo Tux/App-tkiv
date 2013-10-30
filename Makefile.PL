@@ -55,8 +55,10 @@ foreach my $mod (keys %prereq_pm) {
     }
 $n_image_mod or
     die "At least one of @{[grep /^Image::/, keys %prereq_pm]} should be available\n";
-my $cv = `convert --version 2>/dev/null`;
-$cv =~ m/ImageMagick/i or
+do {	local *STDERR;
+	open STDERR, ">", \my $err;
+	`convert --version` || "";
+	} =~ m/ImageMagick/i or
     die "App::tkiv requires ImageMagick's 'convert' to be available\n";
 
 my %wm = (
