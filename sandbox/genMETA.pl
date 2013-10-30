@@ -24,6 +24,7 @@ if ($check) {
     $meta->check_encoding ();
     $meta->check_required ();
     $meta->check_minimum ([ "t", "examples", "iv", "Makefile.PL" ]);
+    $meta->done_testing ();
     }
 elsif ($opt_v) {
     $meta->print_yaml ();
@@ -68,7 +69,7 @@ requires:
   Image::Info:          0
 recommends:
   perl:                 5.018001
-  Getopt::Long:         2.41
+  Getopt::Long:         2.42
   Tk:                   804.031
 configure_requires:
   ExtUtils::MakeMaker:  0
@@ -76,7 +77,7 @@ test_requires:
   Test::Harness:        0
   Test::More:           0.88
 test_recommends:
-  Test::More:           0.98
+  Test::More:           0.99
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           http://repo.or.cz/w/App-tkiv.git
