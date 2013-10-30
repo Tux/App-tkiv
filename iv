@@ -153,7 +153,7 @@ use Cwd qw( realpath );
 use Tk;
 use Tk::JPEG;
 use Tk::PNG;
-use Tk::TIFF;
+eval "use Tk::TIFF;";
 use Tk::Bitmap;
 use Tk::Pixmap;
 use Tk::Photo;
