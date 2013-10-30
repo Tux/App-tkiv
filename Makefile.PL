@@ -20,7 +20,6 @@ my %prereq_pm = (
     "Tk"		=>  804.027,
     "Tk::JPEG"		=>    0,
     "Tk::PNG"		=>    0,
-    "Tk::TIFF"		=>    0,	# Only works with Tk-804.027_500 and up
     "Tk::Bitmap"	=>    0,
     "Tk::Pixmap"	=>    0,
     "Tk::Photo"		=>    0,
@@ -31,28 +30,34 @@ my %prereq_pm = (
     "Tk::BrowseEntry"	=>    0,
     "Tk::Animation"	=>    0,
 
-    # Optional if $mw->screenwidth works reliable
-    "X11::Protocol"	=>    0,
-
     # At least one of these should be available:
     "Image::ExifTool"	=>    0,
     "Image::Size"	=>    0,
     "Image::Info"	=>    0,
     );
+unless ($^O eq "MSWin32") {
+    $prereq_pm{"Tk::TIFF"}	= 0; # Only works with Tk-804.027_500 and up
+    $prereq_pm{"X11::Protocol"}	= 0; # Optional if $mw->screenwidth works reliable
+    }
 
 my $n_image_mod = 0;
-#our $mv;
 foreach my $mod (keys %prereq_pm) {
     $prereq_pm{$mod} > 0 and next;	# Let MakeMaker decide
     my $mv = 0;
     eval "use $mod; \$mv = \$${mod}::VERSION";
     $mv and $prereq_pm{$mod} = $mv;
     $prereq_pm{$mod} eq "-1" and delete $prereq_pm{$mod};
+    if ($mod =~ m/^Image::/) {
+	$mv and $n_image_mod++;
+	next;
+	}
     $prereq_pm{$mod} eq  "0" and die "Module $mod is required\n";
-    $mod =~ m/^Image::/ && $mv and $n_image_mod++;
     }
 $n_image_mod or
     die "At least one of @{[grep /^Image::/, keys %prereq_pm]} should be available\n";
+my $cv = `convert --version 2>/dev/null`;
+$cv =~ m/ImageMagick/i or
+    die "App::tkiv requires ImageMagick's 'convert' to be available\n";
 
 my %wm = (
     NAME         => "App::tkiv",
