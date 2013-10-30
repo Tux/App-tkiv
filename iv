@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-{   # to_background
+unless ($^O eq "MSWin32") {   # to_background
     my $pid = fork;
     if ($pid < 0) {
 	print STDERR "Unable to run in the background, cannot fork: $!\n";
