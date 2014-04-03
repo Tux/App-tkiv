@@ -6,7 +6,7 @@ use warnings;
 unless ($^O eq "MSWin32") {   # to_background
     my $pid = fork;
     if ($pid < 0) {
-	print STDERR "Unable to run in the background, cannot fork: $!\n";
+	warn "Unable to run in the background, cannot fork: $!\n";
 	exit $?;
 	}
     $pid and exit 0;
@@ -95,7 +95,7 @@ my %Option = (
 sub usage
 {
     my ($show_opt) = (@_, 0);
-    print STDERR "usage: iv.pl [-f] [option=value ...] [dir]\n";
+    warn "usage: iv.pl [-f] [option=value ...] [dir]\n";
     if ($show_opt) {
 	foreach my $o (sort keys %Option) {
 	    my $v = $o =~ m/^keys_/
@@ -200,7 +200,7 @@ my $pic = @ARGV && -f $ARGV[-1] && $ARGV[-1] =~ s{/([^/]+)$}{} ? $1 : "";
 	-d $dir or next;
 	foreach my $rcf ("iv.rc", ".ivrc") {
 	    open my $of, "<", "$dir/.ivrc" or next;
-	    $opt_v and print STDERR "Reading $dir/.ivrc\n";
+	    $opt_v and warn "Reading $dir/.ivrc\n";
 	    while (<$of>) {
 		m/^[#!]/		and next;
 		s/\s+$//;
@@ -529,7 +529,7 @@ sub dtcmd
     @_ == 1                or return;
     $idir = $_[0]	   or return ($refreshing = "");
     my $Idir = realpath $idir;
-    #print STDERR "dtcmd (idir = $idir ($Idir))\n";
+    #warn "dtcmd (idir = $idir ($Idir))\n";
     $refreshing eq $Idir  and return;
     $refreshing = $Idir;
 
@@ -582,14 +582,14 @@ sub dtcmd
 	}
 
     $ni = @img;
-    $opt_v and print STDERR "$ni images in $idir\n";
+    $opt_v and warn "$ni images in $idir\n";
     foreach my $img (@img) {
 	my $nt = @tn;
 
 	my $pf = "$Idir/$img";
 	my $ps = -s $pf or next;
 
-	$opt_v and print STDERR "Read $pf ($ps) ...\n";
+	$opt_v and warn "Read $pf ($ps) ...\n";
 	# Read it
 	my ($exif, $angl, $x, $y, $o) = ({}, 0, 0, 0);
 	if ($exiftool) {
@@ -1006,7 +1006,7 @@ sub dtcmd
 			my $msg = "Cannot write converted file $conv:\n";
 			$err and $msg .= "   $err\n";
 			$wrn and $msg .= "   $wrn\n";
-			print STDERR $msg;
+			warn $msg;
 			return 0;
 			}; # ExifOrient
 
@@ -1067,7 +1067,7 @@ sub dtcmd
 
 		# Crop image to selection box
 		$W->bind ($_, sub {
-		    #print STDERR "Crop at $fs (@{[%selection]})\n";
+		    #warn "Crop at $fs (@{[%selection]})\n";
 		    # $fs = orig / 0
 		    #       full / 1
 		    #       10 .. 11300 (%)
@@ -1197,7 +1197,7 @@ sub dtcmd
 	    if ($trg eq "show") {
 		$trg = "";
 		$sls == $def_sls and return; # Already running
-		print STDERR "Let the show begin! ...\n";
+		warn "Let the show begin! ...\n";
 		$sls = $def_sls;
 		return $_pic->($ti);
 		}
@@ -1267,7 +1267,7 @@ $dt = $df->Scrolled ("DirTree",
     -directory	=> $dir,
     -browsecmd  => sub {
 	$dt->xview (moveto => .60);
-	#print STDERR "dtcmd (@_) from scrolled, coming from $idir!\n";
+	#warn "dtcmd (@_) from scrolled, coming from $idir!\n";
 	dtcmd (@_);
 	},
 
