@@ -70,14 +70,14 @@ requires:
 recommends:
   perl:                 5.018001
   Getopt::Long:         2.42
-  Tk:                   804.031
+  Tk:                   804.032
 configure_requires:
   ExtUtils::MakeMaker:  0
 test_requires:
   Test::Harness:        0
   Test::More:           0.88
 test_recommends:
-  Test::More:           0.99
+  Test::More:           1.001003
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           http://repo.or.cz/w/App-tkiv.git
