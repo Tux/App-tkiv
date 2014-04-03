@@ -327,7 +327,7 @@ sub Tk::PhotoXY
     # convert generates multiple files for animated images
     my @cfn = glob "${cfn}*jpg*";
     if (@cfn) {
-	$p = $w->Photo (-file => $cfn[0]);
+	eval { $p = $w->Photo (-file => $cfn[0]) };
 	unlink @cfn;
 	}
     $p;
@@ -349,7 +349,7 @@ sub Tk::PhotoXYXY
     # convert generates multiple files for animated images
     my @cfn = glob "${cfn}*jpg*";
     if (@cfn) {
-	$p = $w->Photo (-file => $cfn[0]);
+	eval { $p = $w->Photo (-file => $cfn[0]) };
 	my $_fn = shift @cfn;
 	$selection{file} = $_fn;
 	push @rm_cfn, $_fn;
@@ -623,6 +623,7 @@ sub dtcmd
 	    $w and ($x, $y) = ($w, $h);
 	    }
 	$x && $y or next;
+	$opt_v > 4 and warn "Size: $x x $y\n";
 
 	# Full screen
 	my ($fx, $fy) = ($cx / $x, $cy / $y);
