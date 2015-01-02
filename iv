@@ -608,14 +608,14 @@ sub dtcmd
 		    }
 		}
 	    }
-	if ($x == 0 and $imsztool) {
-	    my ($w, $h) = imgsize ($pf);
-	    $w and ($x, $y) = ($w, $h);
-	    }
 	if ($x == 0 and $iinftool) {
 	    my (@info) = image_info ($pf);
 	    @info && ref $info[0] eq "HASH" && exists $info[0]{width} and
 		($x, $y) = ($info[0]{width}, $info[0]{height});
+	    }
+	if ($x == 0 and $imsztool) {
+	    my ($w, $h) = imgsize ($pf);
+	    $w and ($x, $y) = ($w, $h);
 	    }
 	if ($x == 0) {
 	    my $q = $pf =~ m/'/ ? '"' : "'";

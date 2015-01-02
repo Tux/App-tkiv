@@ -53,24 +53,28 @@ requires:
   Getopt::Long:         2.27
   File::Copy:           0
   Tk:                   804.027
-  Tk::JPEG:             0
-  Tk::PNG:              0
-  Tk::Bitmap:           0
-  Tk::Pixmap:           0
-  Tk::Photo:            0
-  Tk::Pane:             0
-  Tk::DirTree:          0
-  Tk::Dialog:           0
-  Tk::Balloon:          0
-  Tk::BrowseEntry:      0
   Tk::Animation:        0
+  Tk::Balloon:          0
+  Tk::Bitmap:           0
+  Tk::BrowseEntry:      0
+  Tk::Dialog:           0
+  Tk::DirTree:          0
+  Tk::JPEG:             0
+  Tk::Pane:             0
+  Tk::Photo:            0
+  Tk::Pixmap:           0
+  Tk::PNG:              0
   Image::ExifTool:      0
-  Image::Size:          0
-  Image::Info:          0
 recommends:
   perl:                 5.020001
+  Data::Peek:           0.42
   Getopt::Long:         2.42
+  Image::ExifTool:      9.76
+  Image::Info:          1.37
+  Image::Size:          3.232
   Tk:                   804.032
+  Tk::TIFF:             0.11
+  X11::Protocol:        0.56
 configure_requires:
   ExtUtils::MakeMaker:  0
 test_requires:
