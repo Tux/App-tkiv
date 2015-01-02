@@ -68,7 +68,7 @@ requires:
   Image::Size:          0
   Image::Info:          0
 recommends:
-  perl:                 5.018001
+  perl:                 5.020001
   Getopt::Long:         2.42
   Tk:                   804.032
 configure_requires:
@@ -77,7 +77,7 @@ test_requires:
   Test::Harness:        0
   Test::More:           0.88
 test_recommends:
-  Test::More:           1.001003
+  Test::More:           1.001014
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           http://repo.or.cz/w/App-tkiv.git
