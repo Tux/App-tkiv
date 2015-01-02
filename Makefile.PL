@@ -37,7 +37,7 @@ my %prereq_pm = (
     );
 unless ($^O eq "MSWin32") {
     $prereq_pm{"Tk::TIFF"}	= 0; # Only works with Tk-804.027_500 and up
-    $prereq_pm{"X11::Protocol"}	= 0; # Optional if $mw->screenwidth works reliable
+#   $prereq_pm{"X11::Protocol"}	= 0; # Optional if $mw->screenwidth works reliable
     }
 
 my $n_image_mod = 0;
