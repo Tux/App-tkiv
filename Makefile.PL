@@ -3,12 +3,6 @@ use warnings;
 
 require 5.010;
 
-{   # Check if I have a perl that supports defined-or
-    $a = undef;
-    eval q{$a //= 1};
-    defined $a or die "Your perl does not support defined-or operand (//)\n";
-    }
-
 use ExtUtils::MakeMaker;
 
 my @exe = ("iv");
