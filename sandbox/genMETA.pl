@@ -66,7 +66,6 @@ requires:
   Tk::PNG:              0
   Image::ExifTool:      0
 recommends:
-  perl:                 5.020001
   Data::Peek:           0.42
   Getopt::Long:         2.42
   Image::ExifTool:      9.76
