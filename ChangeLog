@@ -1,6 +1,7 @@
 0.129 - 11 Feb 2015, H.Merijn Brand
     * Remove defined-or test from Makefile.PL
     * Remove perl recommendation from META as it breaks cpan clients
+    * Move repo to github
 
 0.128 - 02 Jan 2015, H.Merijn Brand
     * Require Image::ExifInfo (was optional) and META info for rest
