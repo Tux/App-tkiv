@@ -67,7 +67,7 @@ requires:
   Image::ExifTool:      0
 recommends:
   Data::Peek:           0.42
-  Getopt::Long:         2.42
+  Getopt::Long:         2.43
   Image::ExifTool:      9.76
   Image::Info:          1.37
   Image::Size:          3.232
