@@ -66,12 +66,12 @@ requires:
   Tk::PNG:              0
   Image::ExifTool:      0
 recommends:
-  Data::Peek:           0.42
-  Getopt::Long:         2.43
+  Data::Peek:           0.43
+  Getopt::Long:         2.45
   Image::ExifTool:      9.76
   Image::Info:          1.37
-  Image::Size:          3.232
-  Tk:                   804.032
+  Image::Size:          3.300
+  Tk:                   804.033
   Tk::TIFF:             0.11
   X11::Protocol:        0.56
 configure_requires:

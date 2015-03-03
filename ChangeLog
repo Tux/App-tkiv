@@ -1,3 +1,6 @@
+0.130 - 03 Mar 2015, H.Merijn Brand
+    - 
+
 0.129 - 11 Feb 2015, H.Merijn Brand
     * Remove defined-or test from Makefile.PL
     * Remove perl recommendation from META as it breaks cpan clients
