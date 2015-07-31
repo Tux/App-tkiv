@@ -393,6 +393,20 @@ sub show_exifinfo
 	    -text   => join ("\x{00b7}", grep m/\S/, $awb, $fls, $pgm, $sct),
 	    -tags   => "exifinfo",
 	    );
+	$w->createText (5, 35,
+	    -anchor => "nw",
+	    -fill   => $Option{exifinfocolor},
+	    -font   => $Option{smallfont},
+	    -text   => join ("\x{00b7}" =>
+		map { join " " => map { ucfirst lc $_ } split m/\s+/ => $_ }
+		grep m/\S/, map { $ei->{$_} // "" }
+		"Make",			# Nikon
+		"Model",		# Coolpix S9700
+		"DeviceType",		# Cell Phone
+		"FileSource",		# Digital Camera
+		),
+	    -tags   => "exifinfo",
+	    );
 	}
     } # show_exifinfo
 
