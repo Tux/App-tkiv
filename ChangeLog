@@ -1,5 +1,6 @@
-0.130 - 31 Jul 2015, H.Merijn Brand
+0.130 - 18 Aug 2015, H.Merijn Brand
     * Add a third line to in-image exif info showing device/camera
+    * Add CONTRIBUTING.md
 
 0.129 - 11 Feb 2015, H.Merijn Brand
     * Remove defined-or test from Makefile.PL

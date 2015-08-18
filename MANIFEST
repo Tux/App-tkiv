@@ -7,4 +7,5 @@ lib/App/tkiv.pm
 Makefile.PL
 MANIFEST
 README
+CONTRIBUTING.md
 t/00_pod.t
