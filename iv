@@ -163,6 +163,7 @@ use Tk::Dialog;
 use Tk::Balloon;
 use Tk::BrowseEntry;
 use Tk::Animation;
+use File::Temp qw( tempdir tempfile );
 use File::Copy;
 #use Data::Peek;
 
@@ -188,6 +189,7 @@ eval {
     };
 -x "/usr/bin/exiftran" and $exiftran = 1;
 
+my $tmp = tempdir (CLEANUP => 1);
 my $pic = @ARGV && -f $ARGV[-1] && $ARGV[-1] =~ s{/([^/]+)$}{} ? $1 : "";
    $pic and $opt_1 = 0;
 
@@ -320,7 +322,7 @@ sub Tk::PhotoXY
 {
     my ($w, $f, $x, $y, $r, $p) = (@_, 0);
     $f && $x && $y or return;
-    my $cfn = "/tmp/iv#$$-".$pxyid++;
+    my ($cfh, $cfn) = tempfile ("iv#$$-XXXXXX", DIR => $tmp);
     my ($rx, $ry) = $r == 90 || $r == 270 ? ($y, $x) : ($x, $y);
     my $geo = "${rx}x${ry}";
     my @rot = $r ? ("-rotate", $r) : ();
@@ -342,7 +344,7 @@ sub Tk::PhotoXYXY
 {
     my ($w, $f, $x, $y, $X, $Y, $p) = (@_, 0);
     $f && $x && $y or return;
-    my $cfn = "/tmp/iv#$$-".$pxyid++;
+    my ($cfh, $cfn) = tempfile ("iv#$$-XXXXXX", DIR => $tmp);
     my ($dx, $dy) = ($X - $x, $Y - $y);
     my $geo = "${dx}x$dy+$x+$y";
     my $q = $f =~ m/'/ ? '"' : "'";
@@ -1105,7 +1107,7 @@ sub dtcmd
 			$pr->{phys_org}{file} = $pr->{phys}{file};
 			$pr->{phys} = {
 			    file => $selection{file},
-			    dir  => "/tmp",
+			    dir  => $tmp,
 			    size => -s $selection{file},
 			    titl => "Cropped ". $pr->{phys}{titl},
 			    };

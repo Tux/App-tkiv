@@ -52,6 +52,7 @@ requires:
   Data::Peek:           0
   Getopt::Long:         2.27
   File::Copy:           0
+  File::Temp:           0
   Tk:                   804.027
   Tk::Animation:        0
   Tk::Balloon:          0

@@ -10,6 +10,7 @@ my @exe = ("iv");
 my %prereq_pm = (
     "Getopt::Long"	=> 2.27,
     "File::Copy"	=>    0,
+    "File::Temp"	=>    0,
 
     "Tk"		=>  804.027,
     "Tk::JPEG"		=>    0,
