@@ -1,7 +1,8 @@
-0.130 - 12 Dec 2015, H.Merijn Brand
+0.130 - 02 Jan 2016, H.Merijn Brand
     * Add a third line to in-image exif info showing device/camera
     * Add CONTRIBUTING.md
     * Use File::Temp for temporary files (esp. for Windows users)
+    * It's 2016
 
 0.129 - 11 Feb 2015, H.Merijn Brand
     * Remove defined-or test from Makefile.PL
