@@ -68,9 +68,9 @@ requires:
   Image::ExifTool:      0
 recommends:
   Data::Peek:           0.46
-  Getopt::Long:         2.49
-  Image::ExifTool:      10.40
-  Image::Info:          1.39
+  Getopt::Long:         2.5
+  Image::ExifTool:      10.55
+  Image::Info:          1.40
   Image::Size:          3.300
   Tk:                   804.033
   Tk::TIFF:             0.11
@@ -81,7 +81,7 @@ test_requires:
   Test::Harness:        0
   Test::More:           0.88
 test_recommends:
-  Test::More:           1.302075
+  Test::More:           1.302085
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           https://github.com/Tux/App-tkiv
