@@ -8,10 +8,8 @@ blib/
 color.pl
 cover_db/
 App-
-Makefile
+Makefile$
 MANIFEST.SKIP
-META.json
-META.yml
 MYMETA.json
 MYMETA.yml
 old/
