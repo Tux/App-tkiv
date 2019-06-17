@@ -1,9 +1,9 @@
 requires   "Data::Peek";
 requires   "File::Copy";
 requires   "File::Temp";
-requires   "Getopt::Long"        => "2.27";
+requires   "Getopt::Long"             => "2.27";
 requires   "Image::ExifTool";
-requires   "Tk"                  => "804.027";
+requires   "Tk"                       => "804.027";
 requires   "Tk::Animation";
 requires   "Tk::Balloon";
 requires   "Tk::Bitmap";
@@ -16,14 +16,14 @@ requires   "Tk::Pane";
 requires   "Tk::Photo";
 requires   "Tk::Pixmap";
 
-recommends "Data::Peek"          => "0.48";
-recommends "Getopt::Long"        => "2.5";
-recommends "Image::ExifTool"     => "11.30";
-recommends "Image::Info"         => "1.41";
-recommends "Image::Size"         => "3.300";
-recommends "Tk"                  => "804.034";
-recommends "Tk::TIFF"            => "0.11";
-recommends "X11::Protocol"       => "0.56";
+recommends "Data::Peek"               => "0.48";
+recommends "Getopt::Long"             => "2.5";
+recommends "Image::ExifTool"          => "11.30";
+recommends "Image::Info"              => "1.41";
+recommends "Image::Size"              => "3.300";
+recommends "Tk"                       => "804.034";
+recommends "Tk::TIFF"                 => "0.11";
+recommends "X11::Protocol"            => "0.56";
 
 on "configure" => sub {
     requires   "ExtUtils::MakeMaker";
@@ -31,9 +31,9 @@ on "configure" => sub {
 
 on "test" => sub {
     requires   "Test::Harness";
-    requires   "Test::More"          => "0.88";
+    requires   "Test::More"               => "0.88";
     
-    recommends "Test::More"          => "1.302164";
+    recommends "Test::More"               => "1.302164";
     };
 
 feature "opt_format_tiff", "Support for TIFF" => sub {

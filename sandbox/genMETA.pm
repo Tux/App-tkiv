@@ -465,7 +465,8 @@ sub _cpfd {
 	    $m eq "perl" and next;
 	    my $v = $s->{$m};
 	    printf $sh qq{%-10s "%s"}, $_, $m;
-	    printf $sh qq{%s => "%s"}, " " x (19 - length $m), $v if $v;
+	    my $aw = (24 - length $m); $aw < 0 and $aw = 0;
+	    printf $sh qq{%s => "%s"}, " " x $aw, $v if $v;
 	    say $sh ";";
 	    }
 	$sep = "\n";

@@ -4,6 +4,7 @@ blib
 \.tgz$
 \.git
 \.releaserc
+\.whitesource
 blib/
 color.pl
 cover_db/
