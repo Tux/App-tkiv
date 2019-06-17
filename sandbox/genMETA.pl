@@ -70,7 +70,7 @@ requires:
 recommends:
   Data::Peek:           0.48
   Getopt::Long:         2.5
-  Image::ExifTool:      11.30
+  Image::ExifTool:      11.50
   Image::Info:          1.41
   Image::Size:          3.300
   Tk:                   804.034
