@@ -17,8 +17,8 @@ requires   "Tk::Photo";
 requires   "Tk::Pixmap";
 
 recommends "Data::Peek"               => "0.48";
-recommends "Getopt::Long"             => "2.5";
-recommends "Image::ExifTool"          => "11.30";
+recommends "Getopt::Long"             => "2.51";
+recommends "Image::ExifTool"          => "11.50";
 recommends "Image::Info"              => "1.41";
 recommends "Image::Size"              => "3.300";
 recommends "Tk"                       => "804.034";
@@ -32,8 +32,8 @@ on "configure" => sub {
 on "test" => sub {
     requires   "Test::Harness";
     requires   "Test::More"               => "0.88";
-    
-    recommends "Test::More"               => "1.302164";
+
+    recommends "Test::More"               => "1.302166";
     };
 
 feature "opt_format_tiff", "Support for TIFF" => sub {
