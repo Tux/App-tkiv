@@ -68,7 +68,7 @@ requires:
   Tk::PNG:              0
   Image::ExifTool:      0
 recommends:
-  Data::Peek:           0.49
+  Data::Peek:           0.50
   Getopt::Long:         2.52
   Image::ExifTool:      12.00
   Image::Info:          1.42

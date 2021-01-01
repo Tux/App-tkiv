@@ -16,7 +16,7 @@ requires   "Tk::Pane";
 requires   "Tk::Photo";
 requires   "Tk::Pixmap";
 
-recommends "Data::Peek"               => "0.49";
+recommends "Data::Peek"               => "0.50";
 recommends "Getopt::Long"             => "2.52";
 recommends "Image::ExifTool"          => "12.00";
 recommends "Image::Info"              => "1.42";
