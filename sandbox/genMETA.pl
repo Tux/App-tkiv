@@ -70,10 +70,10 @@ requires:
 recommends:
   Data::Peek:           0.50
   Getopt::Long:         2.52
-  Image::ExifTool:      12.00
+  Image::ExifTool:      12.16
   Image::Info:          1.42
   Image::Size:          3.300
-  Tk:                   804.035
+  Tk:                   804.036
   Tk::TIFF:             0.11
   X11::Protocol:        0.56
 configure_requires:
