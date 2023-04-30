@@ -53,7 +53,7 @@ requires:
   Data::Peek:           0
   Getopt::Long:         2.27
   File::Copy:           0
-  File::Temp:           0
+  File::Temp:           0		# ignore : CVE-2011-4116
   Tk:                   804.027
   Tk::Animation:        0
   Tk::Balloon:          0
@@ -70,7 +70,7 @@ requires:
 recommends:
   Data::Peek:           0.52
   Getopt::Long:         2.54
-  Image::ExifTool:      12.50
+  Image::ExifTool:      12.60
   Image::Info:          1.43
   Image::Size:          3.300
   Tk:                   804.036
@@ -78,11 +78,15 @@ recommends:
   X11::Protocol:        0.56
 configure_requires:
   ExtUtils::MakeMaker:  0
+configure_recommends:
+  ExtUtils::MakeMaker:  7.22
+configure_suggests:
+  ExtUtils::MakeMaker:  7.70
 test_requires:
   Test::Harness:        0
   Test::More:           0.88
 test_recommends:
-  Test::More:           1.302191
+  Test::More:           1.302195
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           https://github.com/Tux/App-tkiv

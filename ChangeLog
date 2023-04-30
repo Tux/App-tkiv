@@ -1,3 +1,6 @@
+0.134 - 30 Apr 2023, H.Merijn Brand
+    * More specific version declarations based on known CVE's
+
 0.133 - 06 Jan 2023, H.Merijn Brand
     * It's 2023
 
