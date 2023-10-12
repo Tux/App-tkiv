@@ -9,6 +9,7 @@ blib/
 color.pl
 cover_db/
 App-
+doc/
 Makefile$
 MANIFEST.SKIP
 MYMETA.json
