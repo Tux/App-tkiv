@@ -41,7 +41,7 @@ version:                VERSION
 abstract:               An image viewer in Perl::Tk based on IrfanView
 license:                perl
 author:
-  - H.Merijn Brand <h.m.brand@xs4all.nl>
+  - H.Merijn Brand <hmbrand@cpan.org>
 generated_by:           Author
 distribution_type:      module
 provides:
@@ -71,7 +71,7 @@ recommends:
   Data::Peek:           0.52
   Getopt::Long:         2.54
   Image::ExifTool:      12.60
-  Image::Info:          1.43
+  Image::Info:          1.44
   Image::Size:          3.300
   Tk:                   804.036
   Tk::TIFF:             0.11
