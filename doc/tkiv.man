@@ -1,4 +1,4 @@
-STDIN(1)              User Contributed Perl Documentation             STDIN(1)
+iv(3)                 User Contributed Perl Documentation                iv(3)
 
 NAME
        App::tkiv - An image viewer in Perl::Tk based on IrfanView
@@ -26,11 +26,11 @@ DESCRIPTION
 
 Command Line Arguments
        -v[#]
-         Set  verbose level. Default value is 0. A plain -v without value will
+         Set verbose level. Default value is 0. A plain -v without value will
          set the level to 1.
 
        -f
-         Start in full-screen mode. Thumbnail view will  not  be  full-screen,
+         Start in full-screen mode. Thumbnail view will not be full-screen,
          but the displayed images will. This overrules the default option from
          .ivrc files.
 
@@ -38,15 +38,15 @@ Command Line Arguments
          Start the slideview on open automatically.
 
        -1
-         After  populating  the  thumbnail view, immediately display the first
+         After populating the thumbnail view, immediately display the first
          image and minimize the thumbnail view.
 
    Options
-       Options  are  case  insensitive.  They  are   read   from   /etc/iv.rc,
-       /etc/.ivrc,  ~/iv.rc,  ~/.ivrc,  ./iv.rc,  ./.ivrc, image_dir/iv.rc and
+       Options are case insensitive. They are read from /etc/iv.rc,
+       /etc/.ivrc, ~/iv.rc, ~/.ivrc, ./iv.rc, ./.ivrc, image_dir/iv.rc and
        image_dir/.ivrc (in that order if available).
 
-       Not (yet) local per  dir,  so  the  last  one  read  stays  active  and
+       Not (yet) local per dir, so the last one read stays active and
        overrules the previous settings.
 
            thumbSize           => 80,          # in pixels
@@ -238,24 +238,24 @@ Command Line Arguments
 
          keys_rotleft
 
-           l                   -                       Rotate image left (90Â°
+           l                   -                       Rotate image left (90ÃÂ°
                                                        anti-clockwise)
 
          keys_rotexifl
 
-           L                   -                       Rotate image left (90Â° anti-
+           L                   -                       Rotate image left (90ÃÂ° anti-
                                                        clockwise) in the EXIF info,
                                                        and store the change in the
                                                        image file
 
          keys_rotright
 
-           r                   -                       Rotate image right (90Â°
+           r                   -                       Rotate image right (90ÃÂ°
                                                        clockwise)
 
          keys_rotexifr
 
-           R                   -                       Rotate image right (90Â°
+           R                   -                       Rotate image right (90ÃÂ°
                                                        clockwise) in the EXIF info,
                                                        and store the change in the
                                                        image file
@@ -335,7 +335,7 @@ Command Line Arguments
            Control-y           -                       Crop image to selection box
 
        Zoom factors are limited to 1 2 3 4 5 7 9 11 14 17 21 26 32 39 47 57 69
-       83  100  120 144 172 206 247 296 355 426 511 613 735 882 1058 1269 1522
+       83 100 120 144 172 206 247 296 355 426 511 613 735 882 1058 1269 1522
        1826 2191 2629 3154 3784 4540 5448 6537 7844 9412 and 11300
 
 EXIF INFO
@@ -348,7 +348,7 @@ DIAGNOSTICS
        ...
 
 BUGS and CAVEATS
-       For  manipulation  (resizing,  rotation,  ...)  the  external   command
+       For manipulation (resizing, rotation, ...) the external command
        "convert" from ImageMagick is used.
 
 TODO
@@ -384,23 +384,23 @@ TODO
           - make image format's optional (TIFF, NEF, ...)
 
 SEE ALSO
-       perl,   Tk,   Tk::JPEG,   Tk::PNG,  Tk::TIFF,  Tk::Bitmap,  Tk::Pixmap,
-       Tk::Animation,   Image::ExifTool,    Image::Size,    Image::Info    and
+       perl, Tk, Tk::JPEG, Tk::PNG, Tk::TIFF, Tk::Bitmap, Tk::Pixmap,
+       Tk::Animation, Image::ExifTool, Image::Size, Image::Info and
        ImageMagick.
 
 WARRANTY
-       The  fact  that  I  use  it  on  my  own  picture sets is by no means a
-       guarantee that the software is without bugs. Use with  care,  and  make
+       The fact that I use it on my own picture sets is by no means a
+       guarantee that the software is without bugs. Use with care, and make
        backups of all pictures you care about before experimenting.
 
 AUTHOR
-       H.Merijn  Brand  <h.m.brand@xs4all.nl>  wrote this for his own personal
+       H.Merijn Brand <h.m.brand@xs4all.nl> wrote this for his own personal
        use, but was asked to make it publicly available as application.
 
 COPYRIGHT AND LICENSE
-       Copyright (C) 2004-2023 H.Merijn Brand
+       Copyright (C) 2004-2024 H.Merijn Brand
 
-       This software is free; you can redistribute it and/or modify  it  under
+       This software is free; you can redistribute it and/or modify it under
        the same terms as Perl itself.
 
-perl v5.38.0                      2023-10-12                          STDIN(1)
+perl v5.40.0                      2024-01-04                             iv(3)
