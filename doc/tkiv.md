@@ -419,7 +419,7 @@ personal use, but was asked to make it publicly available as application.
 
 # COPYRIGHT AND LICENSE
 
-Copyright (C) 2004-2024 H.Merijn Brand
+Copyright (C) 2004-2025 H.Merijn Brand
 
 This software is free; you can redistribute it and/or modify
 it under the same terms as Perl itself.

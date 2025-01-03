@@ -1,4 +1,4 @@
-iv(3)                 User Contributed Perl Documentation                iv(3)
+App::tkiv(3)          User Contributed Perl Documentation         App::tkiv(3)
 
 NAME
        App::tkiv - An image viewer in Perl::Tk based on IrfanView
@@ -238,24 +238,24 @@ Command Line Arguments
 
          keys_rotleft
 
-           l                   -                       Rotate image left (90ÃÂ°
+           l                   -                       Rotate image left (90°
                                                        anti-clockwise)
 
          keys_rotexifl
 
-           L                   -                       Rotate image left (90ÃÂ° anti-
+           L                   -                       Rotate image left (90° anti-
                                                        clockwise) in the EXIF info,
                                                        and store the change in the
                                                        image file
 
          keys_rotright
 
-           r                   -                       Rotate image right (90ÃÂ°
+           r                   -                       Rotate image right (90°
                                                        clockwise)
 
          keys_rotexifr
 
-           R                   -                       Rotate image right (90ÃÂ°
+           R                   -                       Rotate image right (90°
                                                        clockwise) in the EXIF info,
                                                        and store the change in the
                                                        image file
@@ -398,9 +398,9 @@ AUTHOR
        use, but was asked to make it publicly available as application.
 
 COPYRIGHT AND LICENSE
-       Copyright (C) 2004-2024 H.Merijn Brand
+       Copyright (C) 2004-2025 H.Merijn Brand
 
        This software is free; you can redistribute it and/or modify it under
        the same terms as Perl itself.
 
-perl v5.40.0                      2024-01-04                             iv(3)
+perl v5.40.0                      2025-01-03                      App::tkiv(3)

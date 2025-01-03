@@ -76,15 +76,8 @@ sub postamble {
 	'	-@cpants_lint.pl $(DISTVNAME).tgz',
 	'	-@rm -f Debian_CPANTS.txt',
 	'',
-	'doc docs:		doc/tkiv.md doc/tkiv.html doc/tkiv.man',
-	'doc/tkiv.md:		lib/App/tkiv.pm',
-	'	perl make-doc.pl',
-	'doc/tkiv.html:		lib/App/tkiv.pm',
-	'	perl make-doc.pl',
-	'doc/tkiv.3:		lib/App/tkiv.pm',
-	'	perl make-doc.pl',
-	'doc/tkiv.man:		doc/tkiv.3',
-	'	nroff2man     < $? > $@',
+	'doc docs:		doc/tkiv.md doc/tkiv.html doc/tkiv.3',
+	'	perl doc/make-doc.pl',
 	$min_vsn;
     } # postamble
 
