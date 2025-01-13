@@ -9,4 +9,5 @@ Makefile.PL
 MANIFEST
 README
 CONTRIBUTING.md
+SECURITY.md
 t/00_pod.t
