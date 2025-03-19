@@ -70,7 +70,7 @@ requires:
 recommends:
   Data::Peek:           0.53
   Getopt::Long:         2.58
-  Image::ExifTool:      13.10
+  Image::ExifTool:      13.25
   Image::Info:          1.45
   Image::Size:          3.300
   Tk:                   804.036
@@ -81,12 +81,12 @@ configure_requires:
 configure_recommends:
   ExtUtils::MakeMaker:  7.22
 configure_suggests:
-  ExtUtils::MakeMaker:  7.70
+  ExtUtils::MakeMaker:  7.72
 test_requires:
   Test::Harness:        0
   Test::More:           0.88
 test_recommends:
-  Test::More:           1.302207
+  Test::More:           1.302209
 resources:
   license:              http://dev.perl.org/licenses/
   repository:           https://github.com/Tux/App-tkiv
